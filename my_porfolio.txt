@@ -1,0 +1,11 @@
+instalar las dependecies que necesitemos en package-json por orden alfabetico
+npm install para que se actualice y esten disponibles
+importarlas en commponets app.js
+ejemplo:
+    import moment from "moment";
+
+    
+    <div>
+          {moment().format("MMMM Do YYYY, h:mm:ss a")}
+    </div>
+para arrancar el servidor     npm run start
