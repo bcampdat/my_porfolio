@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import moment from "moment";
 
+import PorfolioContainer from './porfolio/porfolio-container';
+
 export default class App extends Component {
   render() {
     return (
@@ -10,6 +12,7 @@ export default class App extends Component {
         <h1>My_Porfolio</h1>
         <div>
           {moment().format("MMMM Do YYYY, h:mm:ss a")}
+          <PorfolioContainer />
         </div>
       </div>
     );
