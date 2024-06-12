@@ -10,13 +10,14 @@ export default class PorfolioContainer extends Component {
     // Establecer estado inicial
     this.state = {
       pageTitle: "Welcome to my portfolio",
+      // isLoading: true, // condicional del render  nos cargaria los datos de una api por ejemplo
+      isLoading: false,  // para que aparezca data y continuar aprendiendo.....
       data: [
         { title: "Quip", category: "eCommerce" },
         { title: "Eventbrite", category: "Scheduling" },
-        { title: "Ministry Safe" , category: "Enterprise" },
+        { title: "Ministry Safe", category: "Enterprise" },
         { title: "SwingAway", category: "eCommerce" },
       ],
-      
     };
 
     // Solucion al error de compilacion lin 62   permitimos el acceso a la funcion handle....
@@ -25,7 +26,6 @@ export default class PorfolioContainer extends Component {
     // this.handlePageTitleUpdate = this.handlePageTitleUpdate.bind(this);
 
     this.handleFilter = this.handleFilter.bind(this);
-
   }
 
   // personal funcional component example
@@ -56,6 +56,10 @@ export default class PorfolioContainer extends Component {
     });
   }
   render() {
+    // condicionales detenemos render para el condicional y continuar
+    if (this.state.isLoading) {
+      return <div>Loading...</div>;
+    }
     return (
       <div>
         <h1>{this.state.pageTitle}</h1>
