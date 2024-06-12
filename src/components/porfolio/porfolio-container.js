@@ -11,10 +11,10 @@ export default class PorfolioContainer extends Component {
     this.state = {
       pageTitle: "Welcome to my portfolio",
       data: [
-        { title: "Quip" },
-        { title: "Eventbrite" },
-        { title: "Ministry Safe" },
-        { title: "SwingAway" },
+        { title: "Quip", category: "eCommerce" },
+        { title: "Eventbrite", category: "Scheduling" },
+        { title: "Ministry Safe" , category: "Enterprise" },
+        { title: "SwingAway", category: "eCommerce" },
       ],
       
     };
@@ -22,7 +22,10 @@ export default class PorfolioContainer extends Component {
     // Solucion al error de compilacion lin 62   permitimos el acceso a la funcion handle....
     // siempre que tengas oyente de clicks o eventos tendras que vincular la funcion al componente de esta forma
 
-    this.handlePageTitleUpdate = this.handlePageTitleUpdate.bind(this); 
+    // this.handlePageTitleUpdate = this.handlePageTitleUpdate.bind(this);
+
+    this.handleFilter = this.handleFilter.bind(this);
+
   }
 
   // personal funcional component example
@@ -38,9 +41,18 @@ export default class PorfolioContainer extends Component {
     });
   }
 
-  handlePageTitleUpdate() {
+  // handlePageTitleUpdate() {
+  //   this.setState({
+  //     pageTitle: "Something Else",
+  //   });
+  // }
+
+  // handle indica que es un evento click
+  handleFilter(filter) {
     this.setState({
-      pageTitle: "Something Else",
+      data: this.state.data.filter((item) => {
+        return item.category === filter;
+      }),
     });
   }
   render() {
@@ -48,6 +60,16 @@ export default class PorfolioContainer extends Component {
       <div>
         <h1>{this.state.pageTitle}</h1>
         {/* acceso al estado inicial */}
+
+        <button onClick={() => this.handleFilter("eCommerce")}>
+          eCommerce
+        </button>
+        <button onClick={() => this.handleFilter("Scheduling")}>
+          Scheduling
+        </button>
+        <button onClick={() => this.handleFilter("Enterprise")}>
+          Enterprise
+        </button>
 
         {this.portfolioItems()}
 
@@ -58,12 +80,11 @@ export default class PorfolioContainer extends Component {
                 <PorfolioItem /> 
               </div>  */}
 
-        <hr />
+        {/* <hr />
 
-        <button onClick={this.handlePageTitleUpdate}>Change Title</button>
+        <button onClick={this.handlePageTitleUpdate}>Change Title</button> */}
       </div>
-        //  nos da error de compilacion setState 
-
+      //  nos da error de compilacion setState
     );
   }
 }
