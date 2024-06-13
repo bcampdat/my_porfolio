@@ -11,13 +11,8 @@ export default class PortfolioContainer extends Component {
     this.state = {
       pageTitle: "Welcome to my portfolio",
       // isLoading: true, // condicional del render  nos cargaria los datos de una api por ejemplo
-      isLoading: false,  // para que aparezca data y continuar aprendiendo.....
-      data: [
-        { title: "Quip", category: "eCommerce",slug:"quip" },
-        { title: "Eventbrite", category: "Scheduling" , slug:"eventbrite"},
-        { title: "Ministry Safe", category: "Enterprise" , slug:"ministry-safe"},
-        { title: "SwingAway", category: "eCommerce", slug:"swingaway"},
-      ],
+      isLoading: false, // para que aparezca data y continuar aprendiendo.....
+      data: [],
     };
 
     // Solucion al error de compilacion lin 62   permitimos el acceso a la funcion handle....
@@ -26,7 +21,7 @@ export default class PortfolioContainer extends Component {
     // this.handlePageTitleUpdate = this.handlePageTitleUpdate.bind(this);
 
     this.handleFilter = this.handleFilter.bind(this);
-    this.getPorfolioItems = this.getPorfolioItems.bind(this);
+    // this.getPorfolioItems = this.getPorfolioItems.bind(this);
   }
 
   getPorfolioItems() {
@@ -34,13 +29,16 @@ export default class PortfolioContainer extends Component {
       .get("https://bcampdat.devcamp.space/portfolio/portfolio_items")
       .then((response) => {
         // handle success
-        console.log('response data',response);
+        // console.log("response data", response);
+        this.setState({
+          data: response.data.portfolio_items,
+        });
       })
       .catch((error) => {
         // handle error
         console.log(error);
       })
-      .finally(function () {
+      .finally(() => {
         // always executed
       });
   }
@@ -54,10 +52,32 @@ export default class PortfolioContainer extends Component {
       // return <PorfolioItem />;
       // return <h1>{item}</h1>;
       // props list form rendering
-      return <PortfolioItem title={item.title} url={"https://www.google.com"} slug ={item.slug} />;
+      // console.log ("item data", item);
+      return <PortfolioItem title={item.title} url={item.url} slug={item.id} />;
     });
   }
 
+  componentDidMount() {
+    this.getPorfolioItems();
+  }
+// version actual de ComponentDidMount
+
+// import React, { useEffect } from 'react';
+
+// function Foo_ComponentDidMount() {
+//   useEffect(() => {
+//     const getPorfolioItems = async () => {
+//       // Lógica para obtener los elementos del portafolio
+//     };
+
+//     getPorfolioItems();
+
+//     // Esta función de limpieza se ejecutará antes de desmontar el componente
+//     return () => {
+//       // Código de limpieza, si es necesario
+//     };
+//   }, []); // El array vacío [] indica que el efecto se ejecutará solo una vez, al montar el componente
+// }
   // handlePageTitleUpdate() {
   //   this.setState({
   //     pageTitle: "Something Else",
@@ -77,8 +97,6 @@ export default class PortfolioContainer extends Component {
     if (this.state.isLoading) {
       return <div>Loading...</div>;
     }
-
-    this.getPorfolioItems();
 
     return (
       <div>
