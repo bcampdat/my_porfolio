@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-
 import PortfolioItem from "./portfolio-item";
+import axios from "axios";
 
 export default class PortfolioContainer extends Component {
   // class component
@@ -26,6 +26,23 @@ export default class PortfolioContainer extends Component {
     // this.handlePageTitleUpdate = this.handlePageTitleUpdate.bind(this);
 
     this.handleFilter = this.handleFilter.bind(this);
+    this.getPorfolioItems = this.getPorfolioItems.bind(this);
+  }
+
+  getPorfolioItems() {
+    axios
+      .get("https://bcampdat.devcamp.space/portfolio/portfolio_items")
+      .then((response) => {
+        // handle success
+        console.log('response data',response);
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+      })
+      .finally(function () {
+        // always executed
+      });
   }
 
   // personal funcional component example
@@ -60,6 +77,9 @@ export default class PortfolioContainer extends Component {
     if (this.state.isLoading) {
       return <div>Loading...</div>;
     }
+
+    this.getPorfolioItems();
+
     return (
       <div>
         <h1>{this.state.pageTitle}</h1>

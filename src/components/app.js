@@ -2,6 +2,7 @@ import moment from "moment";
 import React, { Component } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
+
 import NavigationContainer from "./navigation/navigation-container";
 import PortfolioDetail from "./portfolio/portfolio-detail";
 
@@ -12,12 +13,14 @@ import Home from "./pages/home";
 import NoMatch from "./pages/no-match.js";
 
 export default class App extends Component {
+    
   render() {
+   
     return (
       <div className="app">
         <Router>
           <div>
-            <h1>My_Porfolio</h1>
+            <h1>My_Portfolio</h1>
             <div>{moment().format("MMMM Do YYYY, h:mm:ss a")}</div>
             <NavigationContainer />
 
@@ -27,7 +30,11 @@ export default class App extends Component {
               <Route path="/about-me" component={About} />
               <Route path="/contact" component={Contact} />
               <Route path="/blog" component={Blog} />
-              <Route exact path="/portfolio/:slug" component={PortfolioDetail} />
+              <Route
+                exact
+                path="/portfolio/:slug"
+                component={PortfolioDetail}
+              />
               {/* nos permite englobar varias terminacion de la ruta */}
               <Route component={NoMatch} />
             </Switch>
