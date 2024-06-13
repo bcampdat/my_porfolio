@@ -1,5 +1,11 @@
 import React from "react";
+import PorfolioContainer from "../portfolio/portfolio-container";
 
 export default function () {
-  return <div>Homepage</div>;
+  return (
+    <div>
+      <h2>Homepage</h2>Homepage
+      <PorfolioContainer />
+    </div>
+  );
 }

@@ -1,44 +1,41 @@
-import React, { Component } from "react";
 import moment from "moment";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { Component } from "react";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
-import PorfolioContainer from "./porfolio/porfolio-container";
 import NavigationContainer from "./navigation/navigation-container";
+import PortfolioDetail from "./portfolio/portfolio-detail";
 
-import Home from "./pages/home";
 import About from "./pages/about";
-import Contact from "./pages/contact";
 import Blog from "./pages/blog";
-
+import Contact from "./pages/contact";
+import Home from "./pages/home";
+import NoMatch from "./pages/no-match.js";
 
 export default class App extends Component {
   render() {
     return (
-      <div className="app">       
-
+      <div className="app">
         <Router>
           <div>
-
+            <h1>My_Porfolio</h1>
+            <div>{moment().format("MMMM Do YYYY, h:mm:ss a")}</div>
             <NavigationContainer />
 
             <Switch>
+              {/* importante el orden de las rutas de 1º a la ultima no-match */}
               <Route exact path="/" component={Home} />
               <Route path="/about-me" component={About} />
               <Route path="/contact" component={Contact} />
               <Route path="/blog" component={Blog} />
-              
+              <Route exact path="/portfolio/:slug" component={PortfolioDetail} />
+              {/* nos permite englobar varias terminacion de la ruta */}
+              <Route component={NoMatch} />
             </Switch>
-
           </div>
         </Router>
 
         {/* <h1>DevCamp React Starter</h1>
         <h2>React Redux Router</h2> */}
-        <h1>My_Porfolio</h1>
-        <div>
-          {moment().format("MMMM Do YYYY, h:mm:ss a")}
-          <PorfolioContainer />
-        </div>
       </div>
     );
   }

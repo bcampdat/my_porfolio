@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-import PorfolioItem from "./porfolio-item";
+import PortfolioItem from "./portfolio-item";
 
-export default class PorfolioContainer extends Component {
+export default class PortfolioContainer extends Component {
   // class component
   constructor() {
     super();
@@ -13,10 +13,10 @@ export default class PorfolioContainer extends Component {
       // isLoading: true, // condicional del render  nos cargaria los datos de una api por ejemplo
       isLoading: false,  // para que aparezca data y continuar aprendiendo.....
       data: [
-        { title: "Quip", category: "eCommerce" },
-        { title: "Eventbrite", category: "Scheduling" },
-        { title: "Ministry Safe", category: "Enterprise" },
-        { title: "SwingAway", category: "eCommerce" },
+        { title: "Quip", category: "eCommerce",slug:"quip" },
+        { title: "Eventbrite", category: "Scheduling" , slug:"eventbrite"},
+        { title: "Ministry Safe", category: "Enterprise" , slug:"ministry-safe"},
+        { title: "SwingAway", category: "eCommerce", slug:"swingaway"},
       ],
     };
 
@@ -37,7 +37,7 @@ export default class PorfolioContainer extends Component {
       // return <PorfolioItem />;
       // return <h1>{item}</h1>;
       // props list form rendering
-      return <PorfolioItem title={item.title} url={"https://www.google.com"} />;
+      return <PortfolioItem title={item.title} url={"https://www.google.com"} slug ={item.slug} />;
     });
   }
 
