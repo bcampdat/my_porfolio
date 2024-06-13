@@ -53,31 +53,38 @@ export default class PortfolioContainer extends Component {
       // return <h1>{item}</h1>;
       // props list form rendering
       // console.log ("item data", item);
-      return <PortfolioItem title={item.title} url={item.url} slug={item.id} />;
+      return (
+        <PortfolioItem
+          key={item.id}
+          title={item.name}
+          url={item.url}
+          slug={item.id}
+        />
+      );
     });
   }
 
   componentDidMount() {
     this.getPorfolioItems();
   }
-// version actual de ComponentDidMount
+  // version actual de ComponentDidMount
 
-// import React, { useEffect } from 'react';
+  // import React, { useEffect } from 'react';
 
-// function Foo_ComponentDidMount() {
-//   useEffect(() => {
-//     const getPorfolioItems = async () => {
-//       // Lógica para obtener los elementos del portafolio
-//     };
+  // function Foo_ComponentDidMount() {
+  //   useEffect(() => {
+  //     const getPorfolioItems = async () => {
+  //       // Lógica para obtener los elementos del portafolio
+  //     };
 
-//     getPorfolioItems();
+  //     getPorfolioItems();
 
-//     // Esta función de limpieza se ejecutará antes de desmontar el componente
-//     return () => {
-//       // Código de limpieza, si es necesario
-//     };
-//   }, []); // El array vacío [] indica que el efecto se ejecutará solo una vez, al montar el componente
-// }
+  //     // Esta función de limpieza se ejecutará antes de desmontar el componente
+  //     return () => {
+  //       // Código de limpieza, si es necesario
+  //     };
+  //   }, []); // El array vacío [] indica que el efecto se ejecutará solo una vez, al montar el componente
+  // }
   // handlePageTitleUpdate() {
   //   this.setState({
   //     pageTitle: "Something Else",
