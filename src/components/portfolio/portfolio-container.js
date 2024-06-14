@@ -46,19 +46,24 @@ export default class PortfolioContainer extends Component {
   // personal funcional component example
   portfolioItems() {
     // const data = ["Quip", "Eventbrite", "Ministry Safe"]; esta en el estado inicial
+    
 
     return this.state.data.map((item) => {
       // this.state para que mapee desde el estado inicial
       // return <PorfolioItem />;
       // return <h1>{item}</h1>;
       // props list form rendering
-      // console.log ("item data", item);
+      // console.log ("Portfolio item", item);
+      
+     
+      // navegador  Object.keys(item); nos ayuda con la lista de los items necesarios en porfolio-item
       return (
         <PortfolioItem
           key={item.id}
-          title={item.name}
-          url={item.url}
-          slug={item.id}
+          // title={item.name}
+          // url={item.url}
+          // slug={item.id}
+          item = {item}
         />
       );
     });
