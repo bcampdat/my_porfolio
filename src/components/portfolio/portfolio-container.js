@@ -109,21 +109,21 @@ export default class PortfolioContainer extends Component {
     }
 
     return (
-      <div>
-        <h1>{this.state.pageTitle}</h1>
-        {/* acceso al estado inicial */}
+      /* <h1>{this.state.pageTitle}</h1> */
+      /* acceso al estado inicial */
 
-        <button onClick={() => this.handleFilter("eCommerce")}>
+      <div className="portfolio-items-wrapper">
+        <button className="btn" onClick={() => this.handleFilter("eCommerce")}>
           eCommerce
         </button>
-        <button onClick={() => this.handleFilter("Scheduling")}>
+        <button className="btn" onClick={() => this.handleFilter("Scheduling")}>
           Scheduling
         </button>
-        <button onClick={() => this.handleFilter("Enterprise")}>
+        <button className="btn" onClick={() => this.handleFilter("Enterprise")}>
           Enterprise
         </button>
 
-        <div className="portfolio-items-wrapper">{this.portfolioItems()}</div>
+        {this.portfolioItems()}
         {/* todas las unidades de porfolio */}
 
         {/*   <div>
@@ -136,8 +136,9 @@ export default class PortfolioContainer extends Component {
         {/* <hr />
 
         <button onClick={this.handlePageTitleUpdate}>Change Title</button> */}
+
+        {/* //  nos da error de compilacion setState */}
       </div>
-      //  nos da error de compilacion setState
     );
   }
 }

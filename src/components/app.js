@@ -4,6 +4,7 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
 import NavigationContainer from "./navigation/navigation-container";
 import PortfolioDetail from "./portfolio/portfolio-detail";
+import Auth from "./pages/auth";
 
 import About from "./pages/about";
 import Blog from "./pages/blog";
@@ -24,10 +25,13 @@ export default class App extends Component {
             <div>{moment().format("MMMM Do YYYY, h:mm:ss a")}</div> */}
             <NavigationContainer />
 
-            <Switch>
+            <Switch> 
+             {/*  pages */}
               {/* importante el orden de las rutas de 1º a la ultima no-match */}
               <Route exact path="/" component={Home} />
+              <Route path="/auth" component={Auth} />
               <Route path="/about-me" component={About} />
+
               <Route path="/contact" component={Contact} />
               <Route path="/blog" component={Blog} />
               <Route
