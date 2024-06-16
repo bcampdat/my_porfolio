@@ -46,7 +46,6 @@ export default class PortfolioContainer extends Component {
   // personal funcional component example
   portfolioItems() {
     // const data = ["Quip", "Eventbrite", "Ministry Safe"]; esta en el estado inicial
-    
 
     return this.state.data.map((item) => {
       // this.state para que mapee desde el estado inicial
@@ -54,8 +53,7 @@ export default class PortfolioContainer extends Component {
       // return <h1>{item}</h1>;
       // props list form rendering
       // console.log ("Portfolio item", item);
-      
-     
+
       // navegador  Object.keys(item); nos ayuda con la lista de los items necesarios en porfolio-item
       return (
         <PortfolioItem
@@ -63,7 +61,7 @@ export default class PortfolioContainer extends Component {
           // title={item.name}
           // url={item.url}
           // slug={item.id}
-          item = {item}
+          item={item}
         />
       );
     });
@@ -125,7 +123,8 @@ export default class PortfolioContainer extends Component {
           Enterprise
         </button>
 
-        {this.portfolioItems()}
+        <div className="portfolio-items-wrapper">{this.portfolioItems()}</div>
+        {/* todas las unidades de porfolio */}
 
         {/*   <div>
                 <h2>Portfolio items go here...</h2>

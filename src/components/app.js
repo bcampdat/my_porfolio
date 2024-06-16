@@ -16,7 +16,8 @@ export default class App extends Component {
   render() {
    
     return (
-      <div className="app">
+      // <div className="app">
+      <div className="container">
         <Router>
           <div>
             {/* <h1>My_Portfolio</h1> liberamos nav-bar
