@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
-
 import NavigationContainer from "./navigation/navigation-container";
 import PortfolioDetail from "./portfolio/portfolio-detail";
 import Auth from "./pages/auth";
@@ -13,9 +12,32 @@ import Home from "./pages/home";
 import NoMatch from "./pages/no-match.js";
 
 export default class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      loginInStatus: "NOT_LOGGED_IN",
+      // loginIn : false,  no daria errores en la app
+    };
+  }
+
+  handleSuccessfulLogin = () => {
+    this.setState({
+      loginInStatus: "LOGGED_IN",
+    });
+
+    this.handleSuccessfulLogin = this.handleSuccessfulLogin.bind(this);
+    this.handleUnSuccessfulLogin = this.handleUnSuccessfulLogin.bind(this);
     
+  };
+
+  handleUnSuccessfulLogin = () => {
+    this.setState({
+      loginInStatus: "NOT_LOGGED_IN",
+    });
+  };
+
   render() {
-   
     return (
       // <div className="app">
       <div className="container">
@@ -25,15 +47,29 @@ export default class App extends Component {
             <div>{moment().format("MMMM Do YYYY, h:mm:ss a")}</div> */}
             <NavigationContainer />
 
-            <Switch> 
-             {/*  pages */}
+            <Switch>
+              {/*  pages */}
               {/* importante el orden de las rutas de 1º a la ultima no-match */}
               <Route exact path="/" component={Home} />
-              <Route path="/auth" component={Auth} />
+
+              <Route
+                path="/auth"
+                render={(props) => (
+                  <Auth
+                    {...props}
+                    handleSuccessfulLogin={this.handleSuccessfulLogin}
+                    handleUnSuccessfulLogin={this.handleUnSuccessfulLogin}
+                  />
+                )}
+                // component={Auth} lo vamos a englobar en el render de la ruta
+              />
+
               <Route path="/about-me" component={About} />
 
               <Route path="/contact" component={Contact} />
+
               <Route path="/blog" component={Blog} />
+
               <Route
                 exact
                 path="/portfolio/:slug"
