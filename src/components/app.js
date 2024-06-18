@@ -23,6 +23,7 @@ export default class App extends Component {
 
     this.handleSuccessfulLogin = this.handleSuccessfulLogin.bind(this);
     this.handleUnSuccessfulLogin = this.handleUnSuccessfulLogin.bind(this);
+    this.handleSuccessfulLogout = this.handleSuccessfulLogout.bind(this);
   }
 
   handleSuccessfulLogin() {
@@ -37,6 +38,12 @@ export default class App extends Component {
     });
   }
 
+  handleSuccessfulLogout() {
+    // LOG OUT
+    this.setState({
+      loggedInStatus: "NOT_LOGGED_IN",
+    });
+  }
   checkLoginStatus() {
     return axios
       .get("https://api.devcamp.space/logged_in", {
@@ -54,8 +61,8 @@ export default class App extends Component {
         if (loggedIn && loggedInStatus === "LOGGED_IN") {
           return loggedIn;
         } else if (loggedIn && loggedInStatus === "NOT_LOGGED_IN") {
-          this.setState({            
-            loggedInStatus: "LOGGED_IN",            
+          this.setState({
+            loggedInStatus: "LOGGED_IN",
           });
         } else if (!loggedIn && loggedInStatus === "LOGGED_IN") {
           this.setState({
@@ -84,7 +91,10 @@ export default class App extends Component {
           <div>
             {/* <h1>My_Portfolio</h1> liberamos nav-bar
             <div>{moment().format("MMMM Do YYYY, h:mm:ss a")}</div> */}
-            <NavigationContainer loggedInStatus={this.state.loggedInStatus} />
+            <NavigationContainer
+              loggedInStatus={this.state.loggedInStatus}
+              handleSuccessfulLogout={this.handleSuccessfulLogout}
+            />
 
             <h2>{this.state.loggedInStatus}</h2>
 
@@ -110,7 +120,9 @@ export default class App extends Component {
               <Route path="/contact" component={Contact} />
 
               {/* <Route path="/blog" component={Blog} /> */}
-              {this.state.loggedInStatus === "LOGGED_IN" ? (this.authorizedPages()) : null}
+              {this.state.loggedInStatus === "LOGGED_IN"
+                ? this.authorizedPages()
+                : null}
 
               <Route
                 exact
