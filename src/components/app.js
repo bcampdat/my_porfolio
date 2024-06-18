@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import axios from "axios";
 
 import NavigationContainer from "./navigation/navigation-container";
 import PortfolioDetail from "./portfolio/portfolio-detail";
@@ -22,20 +23,54 @@ export default class App extends Component {
 
     this.handleSuccessfulLogin = this.handleSuccessfulLogin.bind(this);
     this.handleUnSuccessfulLogin = this.handleUnSuccessfulLogin.bind(this);
-
   }
 
   handleSuccessfulLogin() {
     this.setState({
-      loggedInStatus: "LOGGED_IN"
+      loggedInStatus: "LOGGED_IN",
     });
   }
 
-  handleUnSuccessfulLogin () {
+  handleUnSuccessfulLogin() {
     this.setState({
       loggedInStatus: "NOT_LOGGED_IN",
     });
-  };
+  }
+
+  checkLoginStatus() {
+    return axios
+      .get("https://api.devcamp.space/logged_in", {
+        withCredentials: true,
+      })
+      .then((response) => {
+        // console.log("logged in return", response);
+        const loggedIn = response.data.logged_in;
+        const loggedInStatus = this.state.loggedInStatus;
+
+        // If loggedIn and status LOGGED_IN => return data
+        // If loggedIn status NOT_LOGGED_IN => update state
+        // If not loggedIn and status LOGGED_IN => update state
+
+        if (loggedIn && loggedInStatus === "LOGGED_IN") {
+          return loggedIn;
+        } else if (loggedIn && loggedInStatus === "NOT_LOGGED_IN") {
+          this.setState({            
+            loggedInStatus: "LOGGED_IN",            
+          });
+        } else if (!loggedIn && loggedInStatus === "LOGGED_IN") {
+          this.setState({
+            loggedInStatus: "NOT_LOGGED_IN",
+          });
+        }
+      })
+      .catch((error) => {
+        console.log("Error", error);
+      });
+  }
+
+  componentDidMount() {
+    this.checkLoginStatus();
+  }
 
   render() {
     return (
