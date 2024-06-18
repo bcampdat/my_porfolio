@@ -72,6 +72,10 @@ export default class App extends Component {
     this.checkLoginStatus();
   }
 
+  authorizedPages() {
+    return [<Route path="/blog" component={Blog} />];
+  }
+
   render() {
     return (
       // <div className="app">
@@ -80,7 +84,7 @@ export default class App extends Component {
           <div>
             {/* <h1>My_Portfolio</h1> liberamos nav-bar
             <div>{moment().format("MMMM Do YYYY, h:mm:ss a")}</div> */}
-            <NavigationContainer />
+            <NavigationContainer loggedInStatus={this.state.loggedInStatus} />
 
             <h2>{this.state.loggedInStatus}</h2>
 
@@ -105,7 +109,8 @@ export default class App extends Component {
 
               <Route path="/contact" component={Contact} />
 
-              <Route path="/blog" component={Blog} />
+              {/* <Route path="/blog" component={Blog} /> */}
+              {this.state.loggedInStatus === "LOGGED_IN" ? (this.authorizedPages()) : null}
 
               <Route
                 exact

@@ -3,6 +3,16 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const NavigationContainer = (props) => {
+  const dynamicLink = (route, linkText) => {
+    return (
+      <div className="nav-link-wrapper">
+        <NavLink to="/blog" activeClassName="nav-link-active">
+          Blog
+        </NavLink>
+      </div>
+    );
+  };
+
   return (
     <div className="nav-wrapper">
       <div className="left-side">
@@ -23,17 +33,24 @@ const NavigationContainer = (props) => {
             Contact
           </NavLink>
         </div>
-        <div className="nav-link-wrapper">
+              {/* {true ? "do this" : "do something else"} */}
+        {props.loggedInStatus === "LOGGED_IN"
+          ? dynamicLink("/blog", "Blog")
+          : null}
+          
+        {/* <div className="nav-link-wrapper">
           <NavLink to="/blog" activeClassName="nav-link-active">
             Blog
           </NavLink>
-        </div>
+        </div> */}
+
         {/* <button>Contact</button>
             <button>Blog</button> */}
         {/* depende del rol aparecera el boton o no */}
         {/* {true ? <button>Add Blog</button> : null} */}
         {/*  Tendremos en cuenta mas adelante */}
         {/* {false ? <button>Add Blog</button> : null} */}
+
       </div>
       <div className="left-side">BCAMPDAT</div>
     </div>
