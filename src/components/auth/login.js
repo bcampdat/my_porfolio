@@ -4,6 +4,7 @@ import axios from "axios";
 export default class Login extends Component {
   constructor(props) {
     super(props);
+    
     this.state = {
       email: "",
       password: "",
@@ -31,6 +32,7 @@ export default class Login extends Component {
     axios
       .post(
         "https://api.devcamp.space/sessions",
+
         {
           client: {
             // creamos un objeto cliente que tiene email y password
@@ -45,12 +47,12 @@ export default class Login extends Component {
         // console.log("response", response);
         if (response.data.status === "created") {
           // console.log("You can come in...");
-          this.props.handleSuccessfulAuth();
+          this.props.handleSuccessAuth();
         } else {
           this.setState({
             errorText: "Wrong email or password",
           });
-          this.props.handleUnSuccessfulAuth();
+          this.props.handleUnSuccessAuth();
         }
       })
       .catch((error) => {
@@ -58,8 +60,8 @@ export default class Login extends Component {
         this.setState({
           errorText: "An error occurred",
         });
-        console.log (error);
-        this.props.handleUnSuccessfulAuth();
+        console.log(error);
+        this.props.handleUnSuccessAuth();
       });
 
     event.preventDefault();

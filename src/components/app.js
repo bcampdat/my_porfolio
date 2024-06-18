@@ -16,24 +16,24 @@ export default class App extends Component {
     super();
 
     this.state = {
-      loginInStatus:    "NOT_LOGGED_IN",
+      loggedInStatus: "NOT_LOGGED_IN",
       // loginIn : false,  no daria errores en la app
     };
-  }
-
-  handleSuccessfulLogin  () {
-    this.setState({
-      loginInStatus: "LOGGED_IN",
-    });
 
     this.handleSuccessfulLogin = this.handleSuccessfulLogin.bind(this);
     this.handleUnSuccessfulLogin = this.handleUnSuccessfulLogin.bind(this);
 
-  };
+  }
+
+  handleSuccessfulLogin() {
+    this.setState({
+      loggedInStatus: "LOGGED_IN"
+    });
+  }
 
   handleUnSuccessfulLogin () {
     this.setState({
-      loginInStatus: "NOT_LOGGED_IN",
+      loggedInStatus: "NOT_LOGGED_IN",
     });
   };
 
@@ -47,7 +47,7 @@ export default class App extends Component {
             <div>{moment().format("MMMM Do YYYY, h:mm:ss a")}</div> */}
             <NavigationContainer />
 
-            <h2>{this.state.loginInStatus}</h2>
+            <h2>{this.state.loggedInStatus}</h2>
 
             <Switch>
               {/*  pages */}
