@@ -3,7 +3,8 @@ import React from "react";
 const PortfolioSidebarList = (props) => {
   const portfolioList = props.data.map((portfolioItem) => {
     return (
-      <div className="portfolio-item-thumb">
+      <div key = {portfolioItem.id} className="portfolio-item-thumb">
+        {/* idx = indice y pertenece al array y se duplicaria las keys props unique */}
         <div className="portfolio-thumb-image">
           <img src={portfolioItem.thumb_image_url} />
         </div>
