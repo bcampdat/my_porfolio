@@ -3,14 +3,14 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import axios from "axios";
 
 import NavigationContainer from "./navigation/navigation-container";
+import Home from "./pages/home";
+import About from "./pages/about";
+import Contact from "./pages/contact";
+import Blog from "./pages/blog";
+import PortfolioManager from "./pages/portfolio-manager";
 import PortfolioDetail from "./portfolio/portfolio-detail";
 import Auth from "./pages/auth";
-
-import About from "./pages/about";
-import Blog from "./pages/blog";
-import Contact from "./pages/contact";
-import Home from "./pages/home";
-import NoMatch from "./pages/no-match.js";
+import NoMatch from "./pages/no-match";
 
 export default class App extends Component {
   constructor() {
@@ -80,7 +80,7 @@ export default class App extends Component {
   }
 
   authorizedPages() {
-    return [<Route path="/blog" component={Blog} />];
+    return [<Route path="/portfolio-manager" component={PortfolioManager} />];
   }
 
   render() {
@@ -96,7 +96,7 @@ export default class App extends Component {
               handleSuccessfulLogout={this.handleSuccessfulLogout}
             />
 
-            <h2>{this.state.loggedInStatus}</h2>
+            {/* <h2>{this.state.loggedInStatus}</h2> */}
 
             <Switch>
               {/*  pages */}
@@ -119,10 +119,13 @@ export default class App extends Component {
 
               <Route path="/contact" component={Contact} />
 
-              {/* <Route path="/blog" component={Blog} /> */}
+              <Route path="/blog" component={Blog} />
+              
               {this.state.loggedInStatus === "LOGGED_IN"
                 ? this.authorizedPages()
                 : null}
+
+              {/* <Route path="/portfolio-manager" component={PortfolioManager} /> */}
 
               <Route
                 exact
