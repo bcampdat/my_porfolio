@@ -42,6 +42,7 @@ export default class PortfolioForm extends Component {
   }
 
   handleSubmit(event) {
+    // this.buildForm();
     // console.log("event", event);
     axios
       .post(
@@ -52,7 +53,8 @@ export default class PortfolioForm extends Component {
         }
       )
       .then((response) => {
-        console.log("response", response);
+        this.props.handleSucessfulFormSubmission(response.data.portfolio_item);
+        /* console.log("response", response); */
       })
       .catch((error) => {
         console.log("portfolio error", error);

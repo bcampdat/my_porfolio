@@ -11,16 +11,22 @@ export default class PortfolioManager extends Component {
       portfolioItems: [],
     };
 
-    this.handleSucessfulFormSubmission = this.handleSucessfulFormSubmission.bind(this);
+    this.handleSucessfulFormSubmission =
+      this.handleSucessfulFormSubmission.bind(this);
     this.handleFormSubmissionError = this.handleFormSubmissionError.bind(this);
   }
 
-  handleSucessfulFormSubmission() {
+  handleSucessfulFormSubmission(portfolioItem) {
+    this.setState({
+     /*  portfolioItems: [portfolioItem].push(portfolioItem), */
+      portfolioItems: [portfolioItem].concat(this.state.portfolioItems),
+
+      /* cada vez que reciba un array nuevo lo colocara primero */
+    });
+
     // TODO
     // update portfolioItems state
     // and add the portfolioItem to the list
-
-
   }
 
   handleFormSubmissionError(error) {
@@ -28,9 +34,16 @@ export default class PortfolioManager extends Component {
   }
   getPortfolioItems() {
     axios
-      .get("https://bcampdat.devcamp.space/portfolio/portfolio_items", {
+      /* .get("https://bcampdat.devcamp.space/portfolio/portfolio_items", {
         withCredentials: true,
-      })
+      }) */
+      .get(
+        "https://bcampdat.devcamp.space/portfolio/portfolio_items?order_by=created_at&direction=desc",
+       // mantendra el orden que hemos creado
+        {
+          withCredentials: true,
+        }
+      )
       .then((response) => {
         // console.log("response from get portfolio items", response);
         this.setState({
@@ -40,7 +53,6 @@ export default class PortfolioManager extends Component {
       })
       .catch((error) => {
         console.log("error in getPortfolioItems", error);
-
       });
   }
   // lifecycle methods
@@ -53,15 +65,14 @@ export default class PortfolioManager extends Component {
       <div className="portfolio-manager-wrapper">
         <div className="left-column">
           {/* <h1>Portfolio Form .....</h1> */}
-          <PortfolioForm 
-          handleSucessfulFormSubmission={this.handleSucessfulFormSubmission}
-          handleFormSubmissionError={this.handleFormSubmissionError}
+          <PortfolioForm
+            handleSucessfulFormSubmission={this.handleSucessfulFormSubmission}
+            handleFormSubmissionError={this.handleFormSubmissionError}
           />
         </div>
         <div className="right-column">
           {/* <h1>Portfolio Sidebar.....</h1> */}
-          <PortfolioSidebarList data = {this.state.portfolioItems}/>
-
+          <PortfolioSidebarList data={this.state.portfolioItems} />
         </div>
       </div>
     );
