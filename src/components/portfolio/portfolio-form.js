@@ -38,7 +38,6 @@ export default class PortfolioForm extends Component {
     this.thumbRef = React.createRef();
     this.bannerRef = React.createRef();
     this.logoRef = React.createRef();
-
   }
 
   handleThumbDrop() {
@@ -137,7 +136,7 @@ export default class PortfolioForm extends Component {
         this.props.handleSucessfulFormSubmission(response.data.portfolio_item);
         /* console.log("response", response); */
 
-        this.setState = ({
+        this.setState = {
           name: "",
           description: "",
           category: "eCommerce",
@@ -147,7 +146,7 @@ export default class PortfolioForm extends Component {
           thumb_image: "",
           banner_image: "",
           logo: "",
-        });
+        };
 
         [this.thumbRef, this.bannerRef, this.logoRef].forEach((ref) => {
           // inside DOM
@@ -163,95 +162,102 @@ export default class PortfolioForm extends Component {
 
   render() {
     return (
-      <div>
-        <h1>PortfolioForm</h1>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <input
-              type="text"
-              name="name"
-              placeholder="Portfolio Item Name"
-              value={this.state.name}
-              onChange={this.handleChange}
-            />
+      // <div>
+      //   <h1>PortfolioForm</h1>
+      <form onSubmit={this.handleSubmit} className="portfolio-form-wrapper">
+        <div className="two-column">
+          <input
+            type="text"
+            name="name"
+            placeholder="Portfolio Item Name"
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
 
-            <input
-              type="text"
-              name="url"
-              placeholder="URL"
-              value={this.state.url}
-              onChange={this.handleChange}
-            />
-          </div>
+          <input
+            type="text"
+            name="url"
+            placeholder="URL"
+            value={this.state.url}
+            onChange={this.handleChange}
+          />
+        </div>
 
-          <div>
-            <input
-              type="text"
-              name="position"
-              placeholder="Position"
-              value={this.state.position}
-              onChange={this.handleChange}
-            />
+        <div className="two-column">
+          <input
+            type="text"
+            name="position"
+            placeholder="Position"
+            value={this.state.position}
+            onChange={this.handleChange}
+          />
 
-            {/* <input */}
-            <select
-              // type="text"
-              name="category"
-              // placeholder="Category"
-              value={this.state.category}
-              onChange={this.handleChange}
-              // />
-            >
-              <option value="eComerce">eComerce</option>
-              <option value="Scheduling">Scheduling</option>
-              <option value="Enterprise">Enterprise</option>
-            </select>
-          </div>
+          {/* <input */}
+          <select
+            // type="text"
+            name="category"
+            // placeholder="Category"
+            value={this.state.category}
+            onChange={this.handleChange}
+            className="select-elemnt"
+            // />
+          >
+            <option value="eComerce">eComerce</option>
+            <option value="Scheduling">Scheduling</option>
+            <option value="Enterprise">Enterprise</option>
+          </select>
+        </div>
 
-          <div>
-            {/* <input */}
-            <textarea
-              type="text"
-              name="description"
-              placeholder="Description"
-              value={this.state.description}
-              onChange={this.handleChange}
-            />
-          </div>
+        <div className="one-column">
+          {/* <input */}
+          <textarea
+            type="text"
+            name="description"
+            placeholder="Description"
+            value={this.state.description}
+            onChange={this.handleChange}
+          />
+        </div>
 
-          <div className="image-uploaders">
-            {" "}
-            {/* para subir imagenes */}
-            <DropzoneComponent
-              ref = {this.thumbRef}
-              //llamamos a las refs
-              config={this.componentConfig()}
-              djsConfig={this.djsConfig()}
-              eventHandlers={this.handleThumbDrop()}
-            />
+        {/* <div className="image-uploaders three-column"> */}
+        <div className="image-uploaders">
+          {" "}
+          {/* para subir imagenes */}
+          <DropzoneComponent
+            ref={this.thumbRef}
+            //llamamos a las refs
+            config={this.componentConfig()}
+            djsConfig={this.djsConfig()}
+            eventHandlers={this.handleThumbDrop()}
+          >
+            {/* <div className="dz-message">clase de Dropzone que machacamos</div> */}
+            <div className="dz-message">Thumbnail</div>
+          </DropzoneComponent>
+          <DropzoneComponent
+            ref={this.bannerRef}
+            //llamamos a las refs
+            config={this.componentConfig()}
+            djsConfig={this.djsConfig()}
+            eventHandlers={this.handleBannerDrop()}
+          >
+            <div className="dz-message">Banner</div>
+          </DropzoneComponent>
+          <DropzoneComponent
+            ref={this.logoRef}
+            //llamamos a las refs
+            config={this.componentConfig()}
+            djsConfig={this.djsConfig()}
+            eventHandlers={this.handleLogoDrop()}
+          >
+            <div className="dz-message">Logo</div>
+          </DropzoneComponent>
 
-            <DropzoneComponent
-              ref = {this.bannerRef}
-              //llamamos a las refs
-              config={this.componentConfig()}
-              djsConfig={this.djsConfig()}
-              eventHandlers={this.handleBannerDrop()}
-            />
-
-            <DropzoneComponent
-              ref = {this.logoRef}
-              //llamamos a las refs
-              config={this.componentConfig()}
-              djsConfig={this.djsConfig()}
-              eventHandlers={this.handleLogoDrop()}
-            />
-
-          </div>
-          <div>
-            <button type="submit">Save</button>
-          </div>
-        </form>
-      </div>
+        </div>
+        <div>
+          <button class= "btn" type="submit">Save</button>
+        </div>
+      </form>
+      // </div>
     );
   }
 }
