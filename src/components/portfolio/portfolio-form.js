@@ -33,6 +33,12 @@ export default class PortfolioForm extends Component {
 
     this.handleLogoDrop = this.handleLogoDrop.bind(this);
 
+    // referencias
+
+    this.thumbRef = React.createRef();
+    this.bannerRef = React.createRef();
+    this.logoRef = React.createRef();
+
   }
 
   handleThumbDrop() {
@@ -130,6 +136,23 @@ export default class PortfolioForm extends Component {
       .then((response) => {
         this.props.handleSucessfulFormSubmission(response.data.portfolio_item);
         /* console.log("response", response); */
+
+        this.setState = ({
+          name: "",
+          description: "",
+          category: "eCommerce",
+          position: "",
+          url: "",
+          // ref atributos de nuestro estado
+          thumb_image: "",
+          banner_image: "",
+          logo: "",
+        });
+
+        [this.thumbRef, this.bannerRef, this.logoRef].forEach((ref) => {
+          // inside DOM
+          ref.current.dropzone.removeAllFiles();
+        });
       })
       .catch((error) => {
         console.log("portfolio error", error);
@@ -200,18 +223,24 @@ export default class PortfolioForm extends Component {
             {" "}
             {/* para subir imagenes */}
             <DropzoneComponent
+              ref = {this.thumbRef}
+              //llamamos a las refs
               config={this.componentConfig()}
               djsConfig={this.djsConfig()}
               eventHandlers={this.handleThumbDrop()}
             />
 
             <DropzoneComponent
+              ref = {this.bannerRef}
+              //llamamos a las refs
               config={this.componentConfig()}
               djsConfig={this.djsConfig()}
               eventHandlers={this.handleBannerDrop()}
             />
 
             <DropzoneComponent
+              ref = {this.logoRef}
+              //llamamos a las refs
               config={this.componentConfig()}
               djsConfig={this.djsConfig()}
               eventHandlers={this.handleLogoDrop()}
