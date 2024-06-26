@@ -19,6 +19,11 @@ export default class PortfolioForm extends Component {
       thumb_image: "",
       banner_image: "",
       logo: "",
+
+      // axios dynamic
+      editMode: false,
+      apiUrl: "https://bcampdat.devcamp.space/portfolio/portfolio_items",
+      apiAction: "post",
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -67,6 +72,10 @@ export default class PortfolioForm extends Component {
         // thumb_image_url: thumb_image_url || "",
         // banner_image_url: banner_image_url || "",
         // logo_url: logo_url || "",
+
+        editMode: true,
+        apiUrl: `https://bcampdat.devcamp.space/portfolio/portfolio_items/${id}`,
+        apiAction: "patch",
       });
     }
   }
@@ -155,14 +164,23 @@ export default class PortfolioForm extends Component {
   handleSubmit(event) {
     // this.buildForm();
     // console.log("event", event);
-    axios
-      .post(
-        "https://bcampdat.devcamp.space/portfolio/portfolio_items",
-        this.buildForm(),
-        {
-          withCredentials: true,
-        }
-      )
+
+    // axios dynamic 
+    // axios
+    //   .post(
+    //     "https://bcampdat.devcamp.space/portfolio/portfolio_items",
+    //     this.buildForm(),
+    //     {
+    //       withCredentials: true,
+    //     }
+    //   )
+
+    axios ({
+      method : this.state.apiAction,
+      url: this.state.apiUrl,
+      data: this.buildForm(),
+      withCredentials: true,
+    })
       .then((response) => {
         this.props.handleSucessfulFormSubmission(response.data.portfolio_item);
         /* console.log("response", response); */
