@@ -40,6 +40,37 @@ export default class PortfolioForm extends Component {
     this.logoRef = React.createRef();
   }
 
+  componentDidUpdate() {
+    // if (Obj1.keys(Obj2).length) {
+    if (Object.keys(this.props.portfolioToEdit).length > 0) {
+      const {
+        id,
+        name,
+        description,
+        category,
+        position,
+        url,
+        thumb_image_url,
+        banner_image_url,
+        logo_url,
+      } = this.props.portfolioToEdit;
+
+      this.props.clearPortfolioToEdit();
+
+      this.setState({
+        id: id,
+        name: name || "",
+        description: description || "",
+        category: category || "eCommerce",
+        position: position || "",
+        url: url || "",
+        // thumb_image_url: thumb_image_url || "",
+        // banner_image_url: banner_image_url || "",
+        // logo_url: logo_url || "",
+      });
+    }
+  }
+
   handleThumbDrop() {
     return {
       // addicion del archivo con DropzoneComponent
@@ -251,10 +282,11 @@ export default class PortfolioForm extends Component {
           >
             <div className="dz-message">Logo</div>
           </DropzoneComponent>
-
         </div>
         <div>
-          <button className="btn" type="submit">Save</button>
+          <button className="btn" type="submit">
+            Save
+          </button>
         </div>
       </form>
       // </div>
