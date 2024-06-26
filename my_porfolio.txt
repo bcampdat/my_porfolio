@@ -9,3 +9,12 @@ ejemplo:
           {moment().format("MMMM Do YYYY, h:mm:ss a")}
     </div>
 para arrancar el servidor     npm run start
+
+
+fontawesome
+npm i @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome
+
+app.js
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FortAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";

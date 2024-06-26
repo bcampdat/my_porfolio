@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+
 import PortfolioSidebarList from "../portfolio/portfoli-sidebar-list";
 import PortfolioForm from "../portfolio/portfolio-form";
 
@@ -14,11 +15,36 @@ export default class PortfolioManager extends Component {
     this.handleSucessfulFormSubmission =
       this.handleSucessfulFormSubmission.bind(this);
     this.handleFormSubmissionError = this.handleFormSubmissionError.bind(this);
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
+  }
+
+  handleDeleteClick(portfolioItem) {
+    // console.log("handleDeleteClick", portfolioItem);
+    axios
+      .delete(
+        `https://api.devcamp.space/portfolio/portfolio_items/${portfolioItem.id}`,
+        {
+          withCredentials: true,
+        }
+      )
+      .then((response) => {
+        // console.log ("response from delete", response);
+        // actualiza nuestro estado actual
+        this.setState({
+          portfolioItems: this.state.portfolioItems.filter((item) => {
+            return item.id !== portfolioItem.id;
+          }),
+        });
+        return response.data;
+      })
+      .catch((error) => {
+        console.log("handleDeleteClick", error);
+      });
   }
 
   handleSucessfulFormSubmission(portfolioItem) {
     this.setState({
-     /*  portfolioItems: [portfolioItem].push(portfolioItem), */
+      /*  portfolioItems: [portfolioItem].push(portfolioItem), */
       portfolioItems: [portfolioItem].concat(this.state.portfolioItems),
 
       /* cada vez que reciba un array nuevo lo colocara primero */
@@ -39,7 +65,7 @@ export default class PortfolioManager extends Component {
       }) */
       .get(
         "https://bcampdat.devcamp.space/portfolio/portfolio_items?order_by=created_at&direction=desc",
-       // mantendra el orden que hemos creado
+        // mantendra el orden que hemos creado
         {
           withCredentials: true,
         }
@@ -72,7 +98,11 @@ export default class PortfolioManager extends Component {
         </div>
         <div className="right-column">
           {/* <h1>Portfolio Sidebar.....</h1> */}
-          <PortfolioSidebarList data={this.state.portfolioItems} />
+          {/* <PortfolioSidebarList data={this.state.portfolioItems} /> */}
+          <PortfolioSidebarList
+            handleDeleteClick={this.handleDeleteClick}
+            data={this.state.portfolioItems}
+          />
         </div>
       </div>
     );

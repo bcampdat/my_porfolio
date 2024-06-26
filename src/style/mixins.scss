@@ -27,7 +27,7 @@
     border-top: 0px;
     border-right: 0px;
     border-left: 0px;
-    border-bottom: 1px solid $grey;
+    border-bottom: 1px solid $charcoal;
     background-color: transparent;
     transition: 0.5s ease-in-out;
     font-size: 1.1em;
@@ -35,7 +35,7 @@
 
     &:focus {
       outline: none;
-      border-bottom: 1px solid $charcoal;
+      border-bottom: 1px solid $dark-teal;
     }
   }
 }
