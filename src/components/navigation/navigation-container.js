@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { withRouter } from "react-router";
 // withRouter is used to use history object in the component
 // HOC  COMPONENTE DE ALTO NIVEL
@@ -79,7 +81,8 @@ const NavigationContainer = (props) => {
       <div className="right-side">
         BCAMPDAT
         {props.loggedInStatus === "LOGGED_IN" ? (
-          <a onClick={handleSignOut}>Sign Out</a>
+          <a onClick={handleSignOut}>
+            <FontAwesomeIcon icon="sign-out-alt" /></a>
         ) : null}
         {/* no se usa el this.handleSignOut() porque es un componente funcional */}
       </div>

@@ -1,13 +1,28 @@
 .portfolio-sidebar-list-wrapper {
-    .portfolio-item-thumb {
-        padding: 21px;
+  .portfolio-item-thumb {
+    padding: 21px;
 
-        .portfolio-thumb-image img {
-            width: 100%;
-        }
-
-        .title {
-           color: $offwhite;
-        }
+    .portfolio-thumb-image img {
+      width: 100%;
     }
+
+    .text-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      .title {
+        color: $offwhite;
+        font-size: 1.5rem;
+      }
+      .delete-icon {
+        cursor: pointer;
+        color: $offwhite;
+        font-size: 1.5rem;
+        transition: 0.5s ease-in-out;
+        &:hover {
+          color: $warning;
+        }
+      }
+    }
+  }
 }
