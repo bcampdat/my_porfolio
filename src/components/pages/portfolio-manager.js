@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import PortfolioSidebarList from "../portfolio/portfoli-sidebar-list";
+import PortfolioSidebarList from "../portfolio/portfolio-sidebar-list";
 import PortfolioForm from "../portfolio/portfolio-form";
 
 export default class PortfolioManager extends Component {
@@ -31,7 +31,7 @@ export default class PortfolioManager extends Component {
 
   handleEditClick(portfolioItem) {
     this.setState({
-      portfolioToEdit: portfolioItem,
+      portfolioToEdit: portfolioItem
     });
   }
 

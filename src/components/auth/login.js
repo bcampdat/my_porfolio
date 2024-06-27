@@ -47,12 +47,12 @@ export default class Login extends Component {
         // console.log("response", response);
         if (response.data.status === "created") {
           // console.log("You can come in...");
-          this.props.handleSuccessAuth();
+          this.props.handleSuccessfulAuth();
         } else {
           this.setState({
             errorText: "Wrong email or password",
           });
-          this.props.handleUnSuccessAuth();
+          this.props.handleUnSuccessfulAuth();
         }
       })
       .catch((error) => {
@@ -61,7 +61,7 @@ export default class Login extends Component {
           errorText: "An error occurred",
         });
         console.log(error);
-        this.props.handleUnSuccessAuth();
+        this.props.handleUnSuccessfulAuth();
       });
 
     event.preventDefault();

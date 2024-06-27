@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-
-
+import { Link } from "react-router-dom";
 
 export default class PortfolioItem extends Component {
   // class component
@@ -53,10 +52,7 @@ export default class PortfolioItem extends Component {
             "portfolio-img-background " + this.state.portfolioItemClass
           }
           style={{
-            backgroundImage: `url(${thumb_image_url})`,
-            // style={{
-            //   backgroundImage: "url(" + thumb_image_url + ")"
-            // }}
+            backgroundImage: "url(" + thumb_image_url + ")",
           }}
         />
 

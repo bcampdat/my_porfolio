@@ -24,6 +24,14 @@ export default class PortfolioContainer extends Component {
     // this.getPorfolioItems = this.getPorfolioItems.bind(this);
   }
 
+  handleFilter(filter) {
+    this.setState({
+      data: this.state.data.filter((item) => {
+        return item.category === filter;
+      }),
+    });
+  }
+
   getPorfolioItems() {
     axios
       .get("https://bcampdat.devcamp.space/portfolio/portfolio_items")
@@ -34,14 +42,11 @@ export default class PortfolioContainer extends Component {
           data: response.data.portfolio_items,
         });
       })
-      .catch((error) => {
-        // handle error
+      .catch(error => {
         console.log(error);
-      })
-      .finally(() => {
-        // always executed
       });
   }
+
 
   // personal funcional component example
   portfolioItems() {
@@ -95,13 +100,7 @@ export default class PortfolioContainer extends Component {
   // }
 
   // handle indica que es un evento click
-  handleFilter(filter) {
-    this.setState({
-      data: this.state.data.filter((item) => {
-        return item.category === filter;
-      }),
-    });
-  }
+
   render() {
     // condicionales detenemos render para el condicional y continuar
     if (this.state.isLoading) {

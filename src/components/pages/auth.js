@@ -6,17 +6,17 @@ export default class Auth extends Component {
   constructor(props) {
     super(props);
 
-    this.handleSuccessAuth = this.handleSuccessAuth.bind(this);
-    this.handleUnSuccessAuth = this.handleUnSuccessAuth.bind(this);
+    this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
+    this.handleUnSuccessfulAuth = this.handleUnSuccessfulAuth.bind(this);
   }
 
-  handleSuccessAuth() {
+  handleSuccessfulAuth() {
     this.props.handleSuccessfulLogin();
     // si el user esta logeado  (consulta historial)
     this.props.history.push("/");
   }
 
-  handleUnSuccessAuth() {
+  handleUnSuccessfulAuth() {
      this.props.handleUnSuccessfulLogin();
   }
   render() {
@@ -31,8 +31,8 @@ export default class Auth extends Component {
 
         <div className="right-column">
           <Login
-            handleSuccessAuth={this.handleSuccessAuth}
-            handleUnSuccessAuth={this.handleUnSuccessAuth}
+            handleSuccessfulAuth={this.handleSuccessfulAuth}
+            handleUnSuccessfulAuth={this.handleUnSuccessfulAuth}
           />
         </div>
       </div>
