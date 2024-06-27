@@ -182,9 +182,15 @@ export default class PortfolioForm extends Component {
       withCredentials: true,
     })
       .then((response) => {
-        this.props.handleSucessfulFormSubmission(response.data.portfolio_item);
+        if (this.state.editMode) {
+          // === true
+          this.props.handleEditFormSubmission();
+        } else {
+          this.props.handleNewFormSubmission(response.data.portfolio_item);
+        }
+        // this.props.handleSucessfulFormSubmission(response.data.portfolio_item);
         /* console.log("response", response); */
-
+        
         this.setState = {
           name: "",
           description: "",
@@ -195,6 +201,9 @@ export default class PortfolioForm extends Component {
           thumb_image: "",
           banner_image: "",
           logo: "",
+          editMode: false,
+          apiUrl: "https://bcampdat.devcamp.space/portfolio/portfolio_items",
+          apiAction: "post"
         };
 
         [this.thumbRef, this.bannerRef, this.logoRef].forEach((ref) => {

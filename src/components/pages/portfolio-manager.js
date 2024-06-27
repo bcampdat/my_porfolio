@@ -13,8 +13,10 @@ export default class PortfolioManager extends Component {
       portfolioToEdit: {},
     };
 
-    this.handleSucessfulFormSubmission =
-      this.handleSucessfulFormSubmission.bind(this);
+    // this.handleSucessfulFormSubmission =
+    //   this.handleSucessfulFormSubmission.bind(this);
+    this.handleNewFormSubmission = this.handleNewFormSubmission.bind(this);
+    this.handleEditFormSubmission = this.handleEditFormSubmission.bind(this);
     this.handleFormSubmissionError = this.handleFormSubmissionError.bind(this);
     this.handleDeleteClick = this.handleDeleteClick.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this);
@@ -57,7 +59,9 @@ export default class PortfolioManager extends Component {
       });
   }
 
-  handleSucessfulFormSubmission(portfolioItem) {
+  // handleSucessfulFormSubmission(portfolioItem) {
+  handleNewFormSubmission(portfolioItem) {    
+  
     this.setState({
       /*  portfolioItems: [portfolioItem].push(portfolioItem), */
       portfolioItems: [portfolioItem].concat(this.state.portfolioItems),
@@ -68,6 +72,10 @@ export default class PortfolioManager extends Component {
     // TODO
     // update portfolioItems state
     // and add the portfolioItem to the list
+  }
+
+  handleEditFormSubmission() {
+    this.getPortfolioItems();
   }
 
   handleFormSubmissionError(error) {
@@ -107,7 +115,9 @@ export default class PortfolioManager extends Component {
         <div className="left-column">
           {/* <h1>Portfolio Form .....</h1> */}
           <PortfolioForm
-            handleSucessfulFormSubmission={this.handleSucessfulFormSubmission}
+            // handleSucessfulFormSubmission={this.handleSucessfulFormSubmission}
+            handleNewFormSubmission={this.handleNewFormSubmission}
+            handleEditFormSubmission = {this.handleEditFormSubmission}
             handleFormSubmissionError={this.handleFormSubmissionError}
             clearPortfolioToEdit={this.clearPortfolioToEdit}
             portfolioToEdit = {this.state.portfolioToEdit}
