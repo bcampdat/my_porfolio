@@ -59,9 +59,12 @@ export default class PortfolioManager extends Component {
       });
   }
 
+  handleEditFormSubmission() {
+    this.getPortfolioItems();
+  }
+
   // handleSucessfulFormSubmission(portfolioItem) {
-  handleNewFormSubmission(portfolioItem) {    
-  
+  handleNewFormSubmission(portfolioItem) {
     this.setState({
       /*  portfolioItems: [portfolioItem].push(portfolioItem), */
       portfolioItems: [portfolioItem].concat(this.state.portfolioItems),
@@ -72,10 +75,6 @@ export default class PortfolioManager extends Component {
     // TODO
     // update portfolioItems state
     // and add the portfolioItem to the list
-  }
-
-  handleEditFormSubmission() {
-    this.getPortfolioItems();
   }
 
   handleFormSubmissionError(error) {
@@ -117,10 +116,10 @@ export default class PortfolioManager extends Component {
           <PortfolioForm
             // handleSucessfulFormSubmission={this.handleSucessfulFormSubmission}
             handleNewFormSubmission={this.handleNewFormSubmission}
-            handleEditFormSubmission = {this.handleEditFormSubmission}
+            handleEditFormSubmission={this.handleEditFormSubmission}
             handleFormSubmissionError={this.handleFormSubmissionError}
             clearPortfolioToEdit={this.clearPortfolioToEdit}
-            portfolioToEdit = {this.state.portfolioToEdit}
+            portfolioToEdit={this.state.portfolioToEdit}
           />
         </div>
         <div className="right-column">

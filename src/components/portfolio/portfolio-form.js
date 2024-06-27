@@ -23,7 +23,7 @@ export default class PortfolioForm extends Component {
       // axios dynamic
       editMode: false,
       apiUrl: "https://bcampdat.devcamp.space/portfolio/portfolio_items",
-      apiAction: "post",
+      apiAction: "post"
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -69,13 +69,14 @@ export default class PortfolioForm extends Component {
         category: category || "eCommerce",
         position: position || "",
         url: url || "",
-        // thumb_image_url: thumb_image_url || "",
-        // banner_image_url: banner_image_url || "",
-        // logo_url: logo_url || "",
 
         editMode: true,
         apiUrl: `https://bcampdat.devcamp.space/portfolio/portfolio_items/${id}`,
         apiAction: "patch",
+
+        thumb_image_url: thumb_image_url || "",
+        banner_image_url: banner_image_url || "",
+        logo: logo_url || "",
       });
     }
   }
@@ -142,10 +143,12 @@ export default class PortfolioForm extends Component {
       // especialmente para imagenes en el formulario
       formData.append("portfolio_item[thumb_image]", this.state.thumb_image);
     }
+
     if (this.state.banner_image) {
       // especialmente para imagenes en el formulario
       formData.append("portfolio_item[banner_image]", this.state.banner_image);
     }
+
     if (this.state.logo) {
       // especialmente para imagenes en el formulario
       formData.append("portfolio_item[logo]", this.state.logo);
@@ -156,7 +159,7 @@ export default class PortfolioForm extends Component {
 
   handleChange(event) {
     this.setState({
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value
     });
     // console.log("handle change", event);
   }
@@ -165,7 +168,7 @@ export default class PortfolioForm extends Component {
     // this.buildForm();
     // console.log("event", event);
 
-    // axios dynamic 
+    // axios dynamic
     // axios
     //   .post(
     //     "https://bcampdat.devcamp.space/portfolio/portfolio_items",
@@ -175,8 +178,8 @@ export default class PortfolioForm extends Component {
     //     }
     //   )
 
-    axios ({
-      method : this.state.apiAction,
+    axios({
+      method: this.state.apiAction,
       url: this.state.apiUrl,
       data: this.buildForm(),
       withCredentials: true,
@@ -190,8 +193,9 @@ export default class PortfolioForm extends Component {
         }
         // this.props.handleSucessfulFormSubmission(response.data.portfolio_item);
         /* console.log("response", response); */
-        
+
         this.setState = {
+
           name: "",
           description: "",
           category: "eCommerce",
@@ -203,7 +207,7 @@ export default class PortfolioForm extends Component {
           logo: "",
           editMode: false,
           apiUrl: "https://bcampdat.devcamp.space/portfolio/portfolio_items",
-          apiAction: "post"
+          apiAction: "post",
         };
 
         [this.thumbRef, this.bannerRef, this.logoRef].forEach((ref) => {
@@ -212,9 +216,10 @@ export default class PortfolioForm extends Component {
         });
       })
       .catch((error) => {
-        console.log("portfolio error", error);
+        console.log("portfolio form handleSubmit error", error);
       }),
-      event.preventDefault();
+
+    event.preventDefault();
     // eventos sintenticos dom virtual
   }
 
@@ -257,7 +262,7 @@ export default class PortfolioForm extends Component {
             // placeholder="Category"
             value={this.state.category}
             onChange={this.handleChange}
-            className="select-elemnt"
+            className="select-element"
             // />
           >
             <option value="eComerce">eComerce</option>
@@ -278,19 +283,25 @@ export default class PortfolioForm extends Component {
         </div>
 
         {/* <div className="image-uploaders three-column"> */}
+
         <div className="image-uploaders">
-          {" "}
-          {/* para subir imagenes */}
-          <DropzoneComponent
-            ref={this.thumbRef}
-            //llamamos a las refs
-            config={this.componentConfig()}
-            djsConfig={this.djsConfig()}
-            eventHandlers={this.handleThumbDrop()}
-          >
-            {/* <div className="dz-message">clase de Dropzone que machacamos</div> */}
-            <div className="dz-message">Thumbnail</div>
-          </DropzoneComponent>
+          {/* {true ? ( si es true : si es false )} */}
+          {this.state.thumb_image && this.state.editMode ? (
+            <img src={this.state.thumb_image} />
+          ) : (
+            // {" "}
+            // {/* para subir imagenes */}
+            <DropzoneComponent
+              ref={this.thumbRef}
+              //llamamos a las refs
+              config={this.componentConfig()}
+              djsConfig={this.djsConfig()}
+              eventHandlers={this.handleThumbDrop()}
+            >
+              {/* <div className="dz-message">clase de Dropzone que machacamos</div> */}
+              <div className="dz-message">Thumbnail</div>
+            </DropzoneComponent>
+          )}
           <DropzoneComponent
             ref={this.bannerRef}
             //llamamos a las refs
