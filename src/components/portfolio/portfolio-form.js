@@ -19,11 +19,10 @@ export default class PortfolioForm extends Component {
       thumb_image: "",
       banner_image: "",
       logo: "",
-
       // axios dynamic
       editMode: false,
       apiUrl: "https://bcampdat.devcamp.space/portfolio/portfolio_items",
-      apiAction: "post"
+      apiAction: "post",
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -38,6 +37,8 @@ export default class PortfolioForm extends Component {
 
     this.handleLogoDrop = this.handleLogoDrop.bind(this);
 
+    this.deleteImage = this.deleteImage.bind(this);
+
     // referencias
 
     this.thumbRef = React.createRef();
@@ -45,8 +46,23 @@ export default class PortfolioForm extends Component {
     this.logoRef = React.createRef();
   }
 
+  deleteImage(imageType) {
+    axios.delete(
+      `https://api.devcamp.space/portfolio/delete-portfolio-image/${this.state.id}?image_type=${imageType}`,
+      { withCredentials: true }
+    ).then(response => {
+      // console.log("deleteImage ", response);
+      this.setState({
+        [`${imageType}_url`]: ""
+      });
+    }).catch(error => {
+      console.log("deleteImage error", error);
+    });
+  }
+
+  // if (Obj1.keys(Obj2).length) {
+
   componentDidUpdate() {
-    // if (Obj1.keys(Obj2).length) {
     if (Object.keys(this.props.portfolioToEdit).length > 0) {
       const {
         id,
@@ -69,49 +85,32 @@ export default class PortfolioForm extends Component {
         category: category || "eCommerce",
         position: position || "",
         url: url || "",
-
         editMode: true,
         apiUrl: `https://bcampdat.devcamp.space/portfolio/portfolio_items/${id}`,
         apiAction: "patch",
-
         thumb_image_url: thumb_image_url || "",
         banner_image_url: banner_image_url || "",
-        logo: logo_url || "",
+        logo_url: logo_url || "",
       });
     }
   }
 
   handleThumbDrop() {
     return {
-      // addicion del archivo con DropzoneComponent
-      addedfile: (file) => {
-        this.setState({
-          thumb_image: file,
-        });
-      },
-    };
+      addedfile: (file) => this.setState({ thumb_image: file }),
+    }; // addicion del archivo con DropzoneComponent
   }
 
   handleBannerDrop() {
     return {
-      // addicion del archivo con DropzoneComponent
-      addedfile: (file) => {
-        this.setState({
-          banner_image: file,
-        });
-      },
-    };
+      addedfile: (file) => this.setState({ banner_image: file }),
+    }; // addicion del archivo con DropzoneComponent
   }
 
   handleLogoDrop() {
     return {
-      // addicion del archivo con DropzoneComponent
-      addedfile: (file) => {
-        this.setState({
-          logo: file,
-        });
-      },
-    };
+      addedfile: (file) => this.setState({ logo: file }),
+    }; // addicion del archivo con DropzoneComponent
   }
 
   componentConfig() {
@@ -119,10 +118,10 @@ export default class PortfolioForm extends Component {
       iconFiletypes: [".jpg", ".png"],
       showFiletypeIcon: true,
       postUrl: "https://httpbin.org/post",
-      // siempre retornara true
-      // siempre nos permitira llamarla con verbosHttp
     };
   }
+  // siempre retornara true
+  // siempre nos permitira llamarla con verbosHttp
 
   djsConfig() {
     return {
@@ -159,10 +158,10 @@ export default class PortfolioForm extends Component {
 
   handleChange(event) {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
-    // console.log("handle change", event);
   }
+  // console.log("handle change", event);
 
   handleSubmit(event) {
     // this.buildForm();
@@ -194,34 +193,32 @@ export default class PortfolioForm extends Component {
         // this.props.handleSucessfulFormSubmission(response.data.portfolio_item);
         /* console.log("response", response); */
 
-        this.setState = {
-
+        this.setState({
           name: "",
           description: "",
           category: "eCommerce",
           position: "",
           url: "",
-          // ref atributos de nuestro estado
           thumb_image: "",
           banner_image: "",
           logo: "",
           editMode: false,
-          apiUrl: "https://bcampdat.devcamp.space/portfolio/portfolio_items",
+          apiUrl: "https://jordan.devcamp.space/portfolio/portfolio_items",
           apiAction: "post",
-        };
+        });
 
+        // inside DOM
         [this.thumbRef, this.bannerRef, this.logoRef].forEach((ref) => {
-          // inside DOM
           ref.current.dropzone.removeAllFiles();
         });
       })
       .catch((error) => {
         console.log("portfolio form handleSubmit error", error);
-      }),
+      });
 
     event.preventDefault();
-    // eventos sintenticos dom virtual
   }
+  // eventos sintenticos dom virtual
 
   render() {
     return (
@@ -282,12 +279,20 @@ export default class PortfolioForm extends Component {
           />
         </div>
 
-        {/* <div className="image-uploaders three-column"> */}
+        {/* <div className="image-uploaders three-column"> 
+        
+         {true ? ( si es true : si es false )}*/}
 
         <div className="image-uploaders">
-          {/* {true ? ( si es true : si es false )} */}
-          {this.state.thumb_image && this.state.editMode ? (
-            <img src={this.state.thumb_image} />
+          {this.state.thumb_image_url && this.state.editMode ? (
+            <div className="portfolio-manager-image-wrapper">
+              <img src={this.state.thumb_image_url} />
+              <div className="image-removal-link">
+                <a onClick={() => this.deleteImage("thumb_image")}>
+                  Remove file
+                </a>
+              </div>
+            </div>
           ) : (
             // {" "}
             // {/* para subir imagenes */}
@@ -302,24 +307,46 @@ export default class PortfolioForm extends Component {
               <div className="dz-message">Thumbnail</div>
             </DropzoneComponent>
           )}
-          <DropzoneComponent
-            ref={this.bannerRef}
-            //llamamos a las refs
-            config={this.componentConfig()}
-            djsConfig={this.djsConfig()}
-            eventHandlers={this.handleBannerDrop()}
-          >
-            <div className="dz-message">Banner</div>
-          </DropzoneComponent>
-          <DropzoneComponent
-            ref={this.logoRef}
-            //llamamos a las refs
-            config={this.componentConfig()}
-            djsConfig={this.djsConfig()}
-            eventHandlers={this.handleLogoDrop()}
-          >
-            <div className="dz-message">Logo</div>
-          </DropzoneComponent>
+
+          {this.state.banner_image_url && this.state.editMode ? (
+            <div className="portfolio-manager-image-wrapper">
+              <img src={this.state.banner_image_url} />
+              <div className="image-removal-link">
+                <a onClick={() => this.deleteImage("banner_image")}>
+                  Remove file
+                </a>
+              </div>
+            </div>
+          ) : (
+            <DropzoneComponent
+              ref={this.bannerRef}
+              config={this.componentConfig()}
+              djsConfig={this.djsConfig()}
+              eventHandlers={this.handleBannerDrop()}
+            >
+              <div className="dz-message">Banner</div>
+            </DropzoneComponent>
+          )}
+          {this.state.logo_url && this.state.editMode ? (
+            <div className="portfolio-manager-image-wrapper">
+              <img src={this.state.logo_url} />
+              <div className="image-removal-link">
+                <a onClick={() => this.deleteImage("logo_image")}>
+                  Remove file
+                </a>
+              </div>
+            </div>
+          ) : (
+            <DropzoneComponent
+              ref={this.logoRef}
+              //llamamos a las refs
+              config={this.componentConfig()}
+              djsConfig={this.djsConfig()}
+              eventHandlers={this.handleLogoDrop()}
+            >
+              <div className="dz-message">Logo</div>
+            </DropzoneComponent>
+          )}
         </div>
         <div>
           <button className="btn" type="submit">
