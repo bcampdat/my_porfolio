@@ -337,6 +337,7 @@ export default class PortfolioForm extends Component {
             </DropzoneComponent>
           )}
         </div>
+
         <div>
           <button className="btn" type="submit">
             Save

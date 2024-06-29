@@ -27,9 +27,9 @@ export default class PortfolioContainer extends Component {
 
   handleFilter(filter) {
     this.setState({
-      data: this.state.data.filter(item => {
+      data: this.state.data.filter((item) => {
         return item.category === filter;
-      })
+      }),
     });
   }
 
@@ -60,11 +60,11 @@ export default class PortfolioContainer extends Component {
       // console.log ("Portfolio item", item);
 
       // navegador  Object.keys(item); nos ayuda con la lista de los items necesarios en porfolio-item
-      
+
       return <PortfolioItem key={item.id} item={item} />;
-       // title={item.name}
-          // url={item.url}
-          // slug={item.id}
+      // title={item.name}
+      // url={item.url}
+      // slug={item.id}
     });
   }
 
@@ -109,17 +109,17 @@ export default class PortfolioContainer extends Component {
       /* acceso al estado inicial */
 
       <div className="portfolio-items-wrapper">
-      <button className="btn" onClick={() => this.handleFilter("eCommerce")}>
-        eCommerce
-      </button>
-      <button className="btn" onClick={() => this.handleFilter("Scheduling")}>
-        Scheduling
-      </button>
-      <button className="btn" onClick={() => this.handleFilter("Enterprise")}>
-        Enterprise
-      </button>
+        <button className="btn" onClick={() => this.handleFilter("eCommerce")}>
+          eCommerce
+        </button>
+        <button className="btn" onClick={() => this.handleFilter("Scheduling")}>
+          Scheduling
+        </button>
+        <button className="btn" onClick={() => this.handleFilter("Enterprise")}>
+          Enterprise
+        </button>
 
-      {this.portfolioItems()}
+        {this.portfolioItems()}
         {/* todas las unidades de porfolio */}
 
         {/*   <div>

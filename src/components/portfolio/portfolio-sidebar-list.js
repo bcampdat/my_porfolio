@@ -18,18 +18,19 @@ const PortfolioSidebarList = (props) => {
             <a
               // className="edit-icon"
               className="action-icon"
-              onClick={() => props.handleDeleteClick(portfolioItem)}
+              onClick={() => props.handleEditClick(portfolioItem)}
             >
               <FontAwesomeIcon icon="edit" />
             </a>
+
             <a
               // className="delete-icon"
               className="action-icon"
-              onClick={() => props.handleDeleteClick(portfolioItem)}
+              onClick={() => props.handleEditClick(portfolioItem)}
             >
               <FontAwesomeIcon icon="trash" />
-              {/* <i className="fa fa-trash"></i>  en react icon = trash */}
             </a>
+            {/* <i className="fa fa-trash"></i>  en react icon = trash */}
           </div>
         </div>
       </div>
