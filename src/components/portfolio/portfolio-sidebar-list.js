@@ -1,13 +1,12 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
 const PortfolioSidebarList = (props) => {
   const portfolioList = props.data.map((portfolioItem) => {
     return (
       <div key={portfolioItem.id} className="portfolio-item-thumb">
         {/* idx = indice y pertenece al array y se duplicaria las keys props unique */}
-        <div className="portfolio-thumb-image">
+        <div className="portfolio-thumb-img">
           <img src={portfolioItem.thumb_image_url} />
         </div>
 
@@ -19,9 +18,9 @@ const PortfolioSidebarList = (props) => {
             <a
               // className="edit-icon"
               className="action-icon"
-              onClick={() => props.handleEditClick(portfolioItem)}
+              onClick={() => props.handleDeleteClick(portfolioItem)}
             >
-              <FontAwesomeIcon icon="edit" />             
+              <FontAwesomeIcon icon="edit" />
             </a>
             <a
               // className="delete-icon"
@@ -36,12 +35,10 @@ const PortfolioSidebarList = (props) => {
       </div>
     );
   });
-
-  return (
-    <div className="portfolio-sidebar-list-wrapper">
-      {/* <h1>List......</h1> */}
-      {portfolioList}
-    </div>
-  );
+  {
+    /* <h1>List......</h1> */
+  }
+  return <div className="portfolio-sidebar-list-wrapper">{portfolioList}</div>;
 };
+
 export default PortfolioSidebarList;

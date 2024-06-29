@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from "axios";
-
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faSignOutAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTrash,
+  faSignOutAlt,
+  faEdit,
+} from "@fortawesome/free-solid-svg-icons";
 
 import NavigationContainer from "./navigation/navigation-container";
 import Home from "./pages/home";
@@ -24,11 +27,11 @@ export default class App extends Component {
 
     this.state = {
       loggedInStatus: "NOT_LOGGED_IN",
-      // loginIn : false,  no daria errores en la app
     };
+    // loginIn : false,  no daria errores en la app
 
     this.handleSuccessfulLogin = this.handleSuccessfulLogin.bind(this);
-    this.handleUnSuccessfulLogin = this.handleUnSuccessfulLogin.bind(this);
+    this.handleUnsuccessfulLogin = this.handleUnsuccessfulLogin.bind(this);
     this.handleSuccessfulLogout = this.handleSuccessfulLogout.bind(this);
   }
 
@@ -38,14 +41,13 @@ export default class App extends Component {
     });
   }
 
-  handleUnSuccessfulLogin() {
+  handleUnsuccessfulLogin() {
     this.setState({
       loggedInStatus: "NOT_LOGGED_IN",
     });
   }
 
   handleSuccessfulLogout() {
-    // LOG OUT
     this.setState({
       loggedInStatus: "NOT_LOGGED_IN",
     });
@@ -121,11 +123,11 @@ export default class App extends Component {
                   <Auth
                     {...props}
                     handleSuccessfulLogin={this.handleSuccessfulLogin}
-                    handleUnSuccessfulLogin={this.handleUnSuccessfulLogin}
+                    handleUnsuccessfulLogin={this.handleUnsuccessfulLogin}
                   />
                 )}
-                // component={Auth} lo vamos a englobar en el render de la ruta
               />
+              {/* component={Auth} lo vamos a englobar en el render de la ruta */}
 
               <Route path="/about-me" component={About} />
 

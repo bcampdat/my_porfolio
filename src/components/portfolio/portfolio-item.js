@@ -20,6 +20,7 @@ export default class PortfolioItem extends Component {
   }
 
   render() {
+    const { id, description, thumb_image_url, logo_url } = this.props.item;
     // export default class {
     // funcional component
 
@@ -29,8 +30,6 @@ export default class PortfolioItem extends Component {
     // -Log
     // -Description: description
     // -ID: id
-    //
-    const { id, description, thumb_image_url, logo_url } = this.props.item;
 
     return (
       // props list form rendering
@@ -38,8 +37,9 @@ export default class PortfolioItem extends Component {
         className="portfolio-item-wrapper"
         onMouseEnter={() => this.handleMouseEnter()}
         onMouseLeave={() => this.handleMouseLeave()}
-        // espera a que ocurra el evento para ejecutar la funcion}}
       >
+        {/* // espera a que ocurra el evento para ejecutar la funcion}} */}
+
         {/*<h1>{this.state.portfolioItemClass}</h1>  para probar el evento mouse y el efecto blur*/}
         {/* cada unidad de porfolio */}
         {/* <h1>Portfolio Item</h1> */}

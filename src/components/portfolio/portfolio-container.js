@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import PortfolioItem from "./portfolio-item";
 import axios from "axios";
+
+import PortfolioItem from "./portfolio-item";
 
 export default class PortfolioContainer extends Component {
   // class component
@@ -26,13 +27,13 @@ export default class PortfolioContainer extends Component {
 
   handleFilter(filter) {
     this.setState({
-      data: this.state.data.filter((item) => {
+      data: this.state.data.filter(item => {
         return item.category === filter;
-      }),
+      })
     });
   }
 
-  getPorfolioItems() {
+  getPortfolioItems() {
     axios
       .get("https://bcampdat.devcamp.space/portfolio/portfolio_items")
       .then((response) => {
@@ -42,11 +43,10 @@ export default class PortfolioContainer extends Component {
           data: response.data.portfolio_items,
         });
       })
-      .catch(error => {
-        console.log(error);
+      .catch((error) => {
+        console.log("error in getPortfolioItems", error);
       });
   }
-
 
   // personal funcional component example
   portfolioItems() {
@@ -60,21 +60,18 @@ export default class PortfolioContainer extends Component {
       // console.log ("Portfolio item", item);
 
       // navegador  Object.keys(item); nos ayuda con la lista de los items necesarios en porfolio-item
-      return (
-        <PortfolioItem
-          key={item.id}
-          // title={item.name}
+      
+      return <PortfolioItem key={item.id} item={item} />;
+       // title={item.name}
           // url={item.url}
           // slug={item.id}
-          item={item}
-        />
-      );
     });
   }
 
   componentDidMount() {
-    this.getPorfolioItems();
+    this.getPortfolioItems();
   }
+
   // version actual de ComponentDidMount
 
   // import React, { useEffect } from 'react';
@@ -112,17 +109,17 @@ export default class PortfolioContainer extends Component {
       /* acceso al estado inicial */
 
       <div className="portfolio-items-wrapper">
-        <button className="btn" onClick={() => this.handleFilter("eCommerce")}>
-          eCommerce
-        </button>
-        <button className="btn" onClick={() => this.handleFilter("Scheduling")}>
-          Scheduling
-        </button>
-        <button className="btn" onClick={() => this.handleFilter("Enterprise")}>
-          Enterprise
-        </button>
+      <button className="btn" onClick={() => this.handleFilter("eCommerce")}>
+        eCommerce
+      </button>
+      <button className="btn" onClick={() => this.handleFilter("Scheduling")}>
+        Scheduling
+      </button>
+      <button className="btn" onClick={() => this.handleFilter("Enterprise")}>
+        Enterprise
+      </button>
 
-        {this.portfolioItems()}
+      {this.portfolioItems()}
         {/* todas las unidades de porfolio */}
 
         {/*   <div>

@@ -5,10 +5,11 @@
 
   .right-side {
     a {
-      cursor: pointer;
       margin-left: 15px;
-      color: $grey;
+      cursor: pointer;
+      color: $teal;
       transition: 0.5s ease-in-out;
+
       &:hover {
         color: $dark-teal;
       }

@@ -23,7 +23,6 @@ export default class Login extends Component {
       errorText: "",
     });
   }
-
   handleSubmit(event) {
     // console.log("Handle submit", event);
     // nos sirven como debugg
@@ -60,7 +59,7 @@ export default class Login extends Component {
         this.setState({
           errorText: "An error occurred",
         });
-        console.log(error);
+        // console.log(error);
         this.props.handleUnSuccessfulAuth();
       });
 
@@ -98,9 +97,9 @@ export default class Login extends Component {
           <div>
             <button type="submit">Login</button>
           </div>
-        </form>
-        {/* <h1>Form should go here</h1>
+          {/* <h1>Form should go here</h1>
         <div>button</div */}
+        </form>
       </div>
     );
   }

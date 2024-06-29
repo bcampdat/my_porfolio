@@ -2,7 +2,7 @@
   .portfolio-item-thumb {
     padding: 21px;
 
-    .portfolio-thumb-image img {
+    .portfolio-thumb-img img {
       width: 100%;
     }
 
@@ -10,21 +10,23 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+
       .title {
         color: $offwhite;
-        font-size: 1.5rem;
+        font-size: 1.5em;
       }
-      .actions{
+
+      .actions {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-gap: 15px;
-      
+
         .action-icon {
           cursor: pointer;
           color: $offwhite;
           font-size: 1.5em;
           transition: 0.5s ease-in-out;
-      
+
           &:hover {
             color: $warning;
           }

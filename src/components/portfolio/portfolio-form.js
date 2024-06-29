@@ -12,52 +12,45 @@ export default class PortfolioForm extends Component {
     this.state = {
       name: "",
       description: "",
-      // category: "",  con valor por defecto ecomerce si no se elige otro en el select
-      category: "eCommerce",
+      category: "eCommerce", // category: "",  con valor por defecto ecomerce si no se elige otro en el select
       position: "",
       url: "",
       thumb_image: "",
       banner_image: "",
       logo: "",
-      // axios dynamic
-      editMode: false,
+      editMode: false, // axios dynamic
       apiUrl: "https://bcampdat.devcamp.space/portfolio/portfolio_items",
       apiAction: "post",
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
     this.componentConfig = this.componentConfig.bind(this);
     this.djsConfig = this.djsConfig.bind(this);
-
     this.handleThumbDrop = this.handleThumbDrop.bind(this);
-
     this.handleBannerDrop = this.handleBannerDrop.bind(this);
-
     this.handleLogoDrop = this.handleLogoDrop.bind(this);
-
     this.deleteImage = this.deleteImage.bind(this);
-
     // referencias
-
     this.thumbRef = React.createRef();
     this.bannerRef = React.createRef();
     this.logoRef = React.createRef();
   }
 
   deleteImage(imageType) {
-    axios.delete(
-      `https://api.devcamp.space/portfolio/delete-portfolio-image/${this.state.id}?image_type=${imageType}`,
-      { withCredentials: true }
-    ).then(response => {
-      // console.log("deleteImage ", response);
-      this.setState({
-        [`${imageType}_url`]: ""
+    axios
+      .delete(
+        `https://api.devcamp.space/portfolio/delete-portfolio-image/${this.state.id}?image_type=${imageType}`,
+        { withCredentials: true }
+      )
+      .then((response) => {
+        this.setState({
+          [`${imageType}_url`]: "",
+        });
+      })
+      .catch((error) => {
+        console.log("deleteImage error", error);
       });
-    }).catch(error => {
-      console.log("deleteImage error", error);
-    });
   }
 
   // if (Obj1.keys(Obj2).length) {
@@ -104,7 +97,7 @@ export default class PortfolioForm extends Component {
   handleBannerDrop() {
     return {
       addedfile: (file) => this.setState({ banner_image: file }),
-    }; // addicion del archivo con DropzoneComponent
+    };
   }
 
   handleLogoDrop() {
@@ -138,18 +131,16 @@ export default class PortfolioForm extends Component {
     formData.append("portfolio_item[category]", this.state.category);
     formData.append("portfolio_item[position]", this.state.position);
 
+    // especialmente para imagenes en el formulario
     if (this.state.thumb_image) {
-      // especialmente para imagenes en el formulario
       formData.append("portfolio_item[thumb_image]", this.state.thumb_image);
     }
 
     if (this.state.banner_image) {
-      // especialmente para imagenes en el formulario
       formData.append("portfolio_item[banner_image]", this.state.banner_image);
     }
 
     if (this.state.logo) {
-      // especialmente para imagenes en el formulario
       formData.append("portfolio_item[logo]", this.state.logo);
     }
     // debugger;
@@ -185,7 +176,6 @@ export default class PortfolioForm extends Component {
     })
       .then((response) => {
         if (this.state.editMode) {
-          // === true
           this.props.handleEditFormSubmission();
         } else {
           this.props.handleNewFormSubmission(response.data.portfolio_item);
@@ -203,7 +193,7 @@ export default class PortfolioForm extends Component {
           banner_image: "",
           logo: "",
           editMode: false,
-          apiUrl: "https://jordan.devcamp.space/portfolio/portfolio_items",
+          apiUrl: "https://bcampdat.devcamp.space/portfolio/portfolio_items",
           apiAction: "post",
         });
 
@@ -260,9 +250,8 @@ export default class PortfolioForm extends Component {
             value={this.state.category}
             onChange={this.handleChange}
             className="select-element"
-            // />
           >
-            <option value="eComerce">eComerce</option>
+            <option value="eCommerce">eCommerce</option>
             <option value="Scheduling">Scheduling</option>
             <option value="Enterprise">Enterprise</option>
           </select>
@@ -287,6 +276,7 @@ export default class PortfolioForm extends Component {
           {this.state.thumb_image_url && this.state.editMode ? (
             <div className="portfolio-manager-image-wrapper">
               <img src={this.state.thumb_image_url} />
+
               <div className="image-removal-link">
                 <a onClick={() => this.deleteImage("thumb_image")}>
                   Remove file
@@ -311,6 +301,7 @@ export default class PortfolioForm extends Component {
           {this.state.banner_image_url && this.state.editMode ? (
             <div className="portfolio-manager-image-wrapper">
               <img src={this.state.banner_image_url} />
+
               <div className="image-removal-link">
                 <a onClick={() => this.deleteImage("banner_image")}>
                   Remove file
@@ -330,16 +321,14 @@ export default class PortfolioForm extends Component {
           {this.state.logo_url && this.state.editMode ? (
             <div className="portfolio-manager-image-wrapper">
               <img src={this.state.logo_url} />
+
               <div className="image-removal-link">
-                <a onClick={() => this.deleteImage("logo_image")}>
-                  Remove file
-                </a>
+                <a onClick={() => this.deleteImage("logo")}>Remove file</a>
               </div>
             </div>
           ) : (
             <DropzoneComponent
               ref={this.logoRef}
-              //llamamos a las refs
               config={this.componentConfig()}
               djsConfig={this.djsConfig()}
               eventHandlers={this.handleLogoDrop()}
@@ -354,7 +343,6 @@ export default class PortfolioForm extends Component {
           </button>
         </div>
       </form>
-      // </div>
     );
   }
 }

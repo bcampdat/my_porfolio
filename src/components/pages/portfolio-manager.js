@@ -5,9 +5,10 @@ import PortfolioSidebarList from "../portfolio/portfolio-sidebar-list";
 import PortfolioForm from "../portfolio/portfolio-form";
 
 export default class PortfolioManager extends Component {
-  // controlar el trafico
+  // Controla el trafico
   constructor() {
     super();
+
     this.state = {
       portfolioItems: [],
       portfolioToEdit: {},
@@ -31,7 +32,7 @@ export default class PortfolioManager extends Component {
 
   handleEditClick(portfolioItem) {
     this.setState({
-      portfolioToEdit: portfolioItem
+      portfolioToEdit: portfolioItem,
     });
   }
 
@@ -40,9 +41,7 @@ export default class PortfolioManager extends Component {
     axios
       .delete(
         `https://api.devcamp.space/portfolio/portfolio_items/${portfolioItem.id}`,
-        {
-          withCredentials: true,
-        }
+        { withCredentials: true }
       )
       .then((response) => {
         // console.log ("response from delete", response);
@@ -52,10 +51,11 @@ export default class PortfolioManager extends Component {
             return item.id !== portfolioItem.id;
           }),
         });
+
         return response.data;
       })
       .catch((error) => {
-        console.log("handleDeleteClick", error);
+        console.log("handleDeleteClick error", error);
       });
   }
 
@@ -68,7 +68,6 @@ export default class PortfolioManager extends Component {
     this.setState({
       /*  portfolioItems: [portfolioItem].push(portfolioItem), */
       portfolioItems: [portfolioItem].concat(this.state.portfolioItems),
-
       /* cada vez que reciba un array nuevo lo colocara primero */
     });
 
@@ -78,7 +77,7 @@ export default class PortfolioManager extends Component {
   }
 
   handleFormSubmissionError(error) {
-    console.log("handleFormSubmissionError", error);
+    console.log("handleFormSubmissionError error", error);
   }
   getPortfolioItems() {
     axios
@@ -100,7 +99,7 @@ export default class PortfolioManager extends Component {
         });
       })
       .catch((error) => {
-        console.log("error in getPortfolioItems", error);
+        console.log("error manager in getPortfolioItems", error);
       });
   }
   // lifecycle methods
@@ -122,6 +121,7 @@ export default class PortfolioManager extends Component {
             portfolioToEdit={this.state.portfolioToEdit}
           />
         </div>
+
         <div className="right-column">
           {/* <h1>Portfolio Sidebar.....</h1> */}
           {/* <PortfolioSidebarList data={this.state.portfolioItems} /> */}

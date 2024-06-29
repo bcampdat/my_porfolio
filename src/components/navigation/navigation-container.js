@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { withRouter } from "react-router";
@@ -9,7 +8,7 @@ import { withRouter } from "react-router";
 
 import { NavLink } from "react-router-dom";
 
-const NavigationContainer = (props) => {
+const NavigationComponent = (props) => {
   const dynamicLink = (route, linkText) => {
     return (
       <div className="nav-link-wrapper">
@@ -31,7 +30,7 @@ const NavigationContainer = (props) => {
         return response.data;
       })
       .catch((error) => {
-        console.log("Error Signing out", error);
+        console.log("Error signing out", error);
       });
   };
 
@@ -43,6 +42,7 @@ const NavigationContainer = (props) => {
             Home
           </NavLink>
         </div>
+
         <div className="nav-link-wrapper">
           <NavLink to="/about-me" activeClassName="nav-link-active">
             About
@@ -55,8 +55,9 @@ const NavigationContainer = (props) => {
             Contact
           </NavLink>
         </div>
+
         <div className="nav-link-wrapper">
-          <NavLink to="/Blog" activeClassName="nav-link-active">
+          <NavLink to="/blog" activeClassName="nav-link-active">
             Blog
           </NavLink>
         </div>
@@ -64,25 +65,27 @@ const NavigationContainer = (props) => {
         {props.loggedInStatus === "LOGGED_IN"
           ? dynamicLink("/portfolio-manager", "Portfolio Manager")
           : null}
+      </div>
 
-        {/* <div className="nav-link-wrapper">
+      {/* <div className="nav-link-wrapper">
           <NavLink to="/blog" activeClassName="nav-link-active">
             Blog
           </NavLink>
         </div> */}
 
-        {/* <button>Contact</button>
+      {/* <button>Contact</button>
             <button>Blog</button> */}
-        {/* depende del rol aparecera el boton o no */}
-        {/* {true ? <button>Add Blog</button> : null} */}
-        {/*  Tendremos en cuenta mas adelante */}
-        {/* {false ? <button>Add Blog</button> : null} */}
-      </div>
+      {/* depende del rol aparecera el boton o no */}
+      {/* {true ? <button>Add Blog</button> : null} */}
+      {/*  Tendremos en cuenta mas adelante */}
+      {/* {false ? <button>Add Blog</button> : null} */}
+
       <div className="right-side">
         BCAMPDAT
         {props.loggedInStatus === "LOGGED_IN" ? (
           <a onClick={handleSignOut}>
-            <FontAwesomeIcon icon="sign-out-alt" /></a>
+            <FontAwesomeIcon icon="sign-out-alt" />
+          </a>
         ) : null}
         {/* no se usa el this.handleSignOut() porque es un componente funcional */}
       </div>
@@ -90,5 +93,5 @@ const NavigationContainer = (props) => {
   );
 };
 
-export default withRouter(NavigationContainer);
+export default withRouter(NavigationComponent);
 // withRouter is used to use history object in the component NavigationContainer;
