@@ -28,40 +28,43 @@ class Blog extends Component {
     };
 
     this.getBlogItems = this.getBlogItems.bind(this);
-    this.activateInfiniteScroll();
+    // this.activateInfiniteScroll();
+    this.onScroll = this.onScroll.bind(this);
+    window.addEventListener("scroll", this.onScroll, false);
   }
 
-  activateInfiniteScroll() {
-    // console.log("onscroll");
-    // PROPIEDADES DEL NAVEGADOR
-    // console.log("window.innerHeight", window.innerHeight);
-    // 421px altura del navegador en el usuario
-    // console.log(
-    //   "document.documentElement.scrollTop",
-    //   document.documentElement.scrollTop
-    // );
-    // cuanto se desplaza el navegador verticalmente
-    // console.log(
-    //   "document.documentElement.offsetHeight",
-    //   document.documentElement.offsetHeight
-    // );
-    // altura de compensacion   cuan longitud tiene nuestra ventana
-    window.onscroll = () => {
-      if (
-        this.state.isLoading ||
-        this.state.blogItems.length === this.state.totalCount
-      ) {
-        return;
-      }
-      
-      if (
-        window.innerHeight + document.documentElement.scrollTop ===
-        document.documentElement.offsetHeight
-      ) {
-        this.getBlogItems();
-        // console.log("get more posts");
-      }
-    };
+  // activateInfiniteScroll() {
+
+  // console.log("onscroll");
+  // PROPIEDADES DEL NAVEGADOR
+  // console.log("window.innerHeight", window.innerHeight);
+  // 421px altura del navegador en el usuario
+  // console.log(
+  //   "document.documentElement.scrollTop",
+  //   document.documentElement.scrollTop
+  // );
+  // cuanto se desplaza el navegador verticalmente
+  // console.log(
+  //   "document.documentElement.offsetHeight",
+  //   document.documentElement.offsetHeight
+  // );
+  // altura de compensacion   cuan longitud tiene nuestra ventana
+  // window.onscroll = () => {
+  onScroll() {
+    if (
+      this.state.isLoading ||
+      this.state.blogItems.length === this.state.totalCount
+    ) {
+      return;
+    }
+
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight
+    ) {
+      this.getBlogItems();
+      // console.log("get more posts");
+    }
   }
   getBlogItems() {
     this.setState({
@@ -69,13 +72,16 @@ class Blog extends Component {
     });
 
     axios
-      .get(`https://bcampdat.devcamp.space/portfolio/portfolio_blogs?page=${this.state.currentPage}`	, {
-        withCredentials: true,
-      })
+      .get(
+        `https://bcampdat.devcamp.space/portfolio/portfolio_blogs?page=${this.state.currentPage}`,
+        {
+          withCredentials: true,
+        }
+      )
       .then((response) => {
         // console.log("response from get blog items", response);
         console.log("getting", response.data);
-        this.setState({          
+        this.setState({
           // blogItems: response.data.portfolio_blogs,
           blogItems: this.state.blogItems.concat(response.data.portfolio_blogs),
           totalCount: response.data.meta.total_records,
@@ -86,8 +92,12 @@ class Blog extends Component {
         console.log("getBlogItems error", error);
       });
   }
-  componentWillMount() {
+  UNcomponentWillMount() {
     this.getBlogItems();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.onScroll, false);
   }
 
   render() {
