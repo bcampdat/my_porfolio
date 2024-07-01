@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 const BlogItem = props => {
   const {
-    id,    
+    id,
+    blog_status,
     content,
     title,
-    blog_status,
     featured_image_url
   } = props.blogItem;
 

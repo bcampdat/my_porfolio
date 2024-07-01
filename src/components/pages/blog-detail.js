@@ -30,8 +30,12 @@ export default class BlogDetail extends Component {
     this.getBlogItem();
   }
   render() {
-    const { title, content, featured_image_url, blog_status } =
-      this.state.blogItem;
+    const {
+      title,
+      content,
+      featured_image_url,
+      blog_status
+    } = this.state.blogItem;
 
     //console.log("currentId", this.state.currentId);
     return (
