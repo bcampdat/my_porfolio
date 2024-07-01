@@ -9,10 +9,11 @@ export default class PortfolioContainer extends Component {
     super();
     // da error de compilacion si no se incluye el super
     // Establecer estado inicial
+    // isLoading: true, // condicional del render  nos cargaria los datos de una api por ejemplo
+    // para que aparezca data y continuar aprendiendo....
     this.state = {
       pageTitle: "Welcome to my portfolio",
-      // isLoading: true, // condicional del render  nos cargaria los datos de una api por ejemplo
-      isLoading: false, // para que aparezca data y continuar aprendiendo.....
+      isLoading: false,
       data: [],
     };
 

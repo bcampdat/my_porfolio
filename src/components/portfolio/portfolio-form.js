@@ -6,19 +6,20 @@ import "../../../node_modules/react-dropzone-component/styles/filepicker.css";
 import "../../../node_modules/dropzone/dist/min/dropzone.min.css";
 
 export default class PortfolioForm extends Component {
+  // category: "",  con valor por defecto ecomerce si no se elige otro en el select
   constructor(props) {
     super(props);
 
     this.state = {
       name: "",
       description: "",
-      category: "eCommerce", // category: "",  con valor por defecto ecomerce si no se elige otro en el select
+      category: "eCommerce",
       position: "",
       url: "",
       thumb_image: "",
       banner_image: "",
       logo: "",
-      editMode: false, // axios dynamic
+      editMode: false,
       apiUrl: "https://bcampdat.devcamp.space/portfolio/portfolio_items",
       apiAction: "post",
     };
@@ -44,6 +45,7 @@ export default class PortfolioForm extends Component {
         { withCredentials: true }
       )
       .then((response) => {
+        
         this.setState({
           [`${imageType}_url`]: "",
         });
@@ -154,20 +156,20 @@ export default class PortfolioForm extends Component {
   }
   // console.log("handle change", event);
 
+  // this.buildForm();
+  // console.log("event", event);
+
+  // axios dynamic
+  // axios
+  //   .post(
+  //     "https://bcampdat.devcamp.space/portfolio/portfolio_items",
+  //     this.buildForm(),
+  //     {
+  //       withCredentials: true,
+  //     }
+  //   )
+
   handleSubmit(event) {
-    // this.buildForm();
-    // console.log("event", event);
-
-    // axios dynamic
-    // axios
-    //   .post(
-    //     "https://bcampdat.devcamp.space/portfolio/portfolio_items",
-    //     this.buildForm(),
-    //     {
-    //       withCredentials: true,
-    //     }
-    //   )
-
     axios({
       method: this.state.apiAction,
       url: this.state.apiUrl,
@@ -208,6 +210,7 @@ export default class PortfolioForm extends Component {
 
     event.preventDefault();
   }
+
   // eventos sintenticos dom virtual
 
   render() {
