@@ -11,6 +11,28 @@ export default class RichTextEditor extends Component {
     this.state = {
       editorState: EditorState.createEmpty(),
     };
+
+    this.onEditorStateChange = this.onEditorStateChange.bind(this);
+  }
+
+  onEditorStateChange(editorState) {
+    // this.setState({    
+    //   editorState,
+    // })
+    // this.props.handleRichTextEditorChange(editorState);
+//  }
+     //   no funcionaria en este caso al ser setState asincrono  
+     // no se renderiza la actualizacion del  estado a tiempo y pierde memoria
+
+    // mejor escribirlo de esta forma 
+    this.setState(
+      { editorState },
+      this.props.handleRichTextEditorChange(
+        draftToHtml(convertToRaw(this.state.editorState.getCurrentContent()))
+        // convertimos content en html   tags usables 
+        // ej   <p>draft editor rich<strong>draft editor rich</strong></p>
+      )
+    );
   }
   render() {
     return (
@@ -21,6 +43,7 @@ export default class RichTextEditor extends Component {
           editorState={this.state.editorState}
           wrapperClassName="demo-wrapper"
           editorClassname="demo-editor"
+          onEditorStateChange={this.onEditorStateChange}
         />
       </div>
     );
