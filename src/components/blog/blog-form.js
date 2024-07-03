@@ -11,13 +11,13 @@ export default class BlogForm extends Component {
     this.state = {
       title: "",
       blog_status: "",
-
       content: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleRichTextEditorChange = this.handleRichTextEditorChange.bind(this);
+    this.handleRichTextEditorChange =
+      this.handleRichTextEditorChange.bind(this);
   }
 
   handleRichTextEditorChange(content) {
@@ -46,14 +46,16 @@ export default class BlogForm extends Component {
       )
       .then((response) => {
         // this.props.handleSuccessfullFormSubmission(response.data);
-        this.props.handleSuccessfullFormSubmission(
-          response.data.portfolio_blog
-        );
 
         this.setState({
           title: "",
           blog_status: "",
+          content: "",
         });
+
+        this.props.handleSuccessfullFormSubmission(
+          response.data.portfolio_blog
+        );
       })
       .catch((error) => {
         console.log("handleSubmit for blog error", error);
