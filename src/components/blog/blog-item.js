@@ -16,6 +16,7 @@ const BlogItem = (props) => {
       <div>
         <Truncate
           lines={5}
+          // nos permite cortar el texto en caso de que sea muy grande y añadir funcion para ver más
           ellipsis={
             <span>
               ...<Link to={`/b/${id}`}>Read more</Link>
@@ -23,6 +24,7 @@ const BlogItem = (props) => {
           }
         >
           {striptags(content)}
+          {/* elimina las etiquetas de cadena  p, a, ... */}
         </Truncate>
       </div>
     </div>
