@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-
 import axios from "axios";
 
+import DropzoneComponent from "react-dropzone-component";
 import RichTextEditor from "../forms/rich-text-editor";
 
 export default class BlogForm extends Component {
@@ -12,12 +12,40 @@ export default class BlogForm extends Component {
       title: "",
       blog_status: "",
       content: "",
+      featured_image: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleRichTextEditorChange =
       this.handleRichTextEditorChange.bind(this);
+
+    this.componentConfig = this.componentConfig.bind(this);
+    this.djsConfig = this.djsConfig.bind(this);
+    this.handleFeaturedImageDrop = this.handleFeaturedImageDrop.bind(this);
+
+    this.featuredImageRef = React.createRef();
+  }
+
+  componentConfig() {
+    return {
+      iconFiletypes: [".jpg", ".png"],
+      showFiletypeIcon: true,
+      postUrl: "https://httpbin.org/post",
+    };
+  }
+
+  djsConfig() {
+    return {
+      addRemoveLinks: true,
+      maxFiles: 1,
+    };
+  }
+
+  handleFeaturedImageDrop() {
+    return {
+      addedfile: (file) => this.setState({ featured_image: file }),
+    };
   }
 
   handleRichTextEditorChange(content) {
@@ -34,6 +62,13 @@ export default class BlogForm extends Component {
     formData.append("portfolio_blog[blog_status]", this.state.blog_status);
     formData.append("portfolio_blog[content]", this.state.content);
 
+    if (this.state.featured_image) {
+      formData.append(
+        "portfolio_blog[featured_image]",
+        this.state.featured_image
+      );
+    }
+
     return formData;
   }
 
@@ -47,10 +82,15 @@ export default class BlogForm extends Component {
       .then((response) => {
         // this.props.handleSuccessfullFormSubmission(response.data);
 
+        if (this.state.featured_image) {
+          this.featuredImageRef.current.dropzone.removeAllFiles();
+        }
+
         this.setState({
           title: "",
           blog_status: "",
           content: "",
+          featured_image: "",
         });
 
         this.props.handleSuccessfullFormSubmission(
@@ -102,6 +142,16 @@ export default class BlogForm extends Component {
           <RichTextEditor
             handleRichTextEditorChange={this.handleRichTextEditorChange}
           />
+        </div>
+        <div className="image-uploaders">
+          <DropzoneComponent
+            ref={this.featuredImageRef}
+            config={this.componentConfig()}
+            djsConfig={this.djsConfig()}
+            eventHandlers={this.handleFeaturedImageDrop()}
+          >
+            <div className="dz-message">Featured Image</div>
+          </DropzoneComponent>
         </div>
 
         <button className="btn">Save</button>

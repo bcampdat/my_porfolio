@@ -8,4 +8,11 @@
   input {
     margin-bottom: 0px;
   }
+
+  // style blog
+
+  .image-uploaders {
+    @include base-grid();
+    grid-template-columns: 200px;
+  }
 }
