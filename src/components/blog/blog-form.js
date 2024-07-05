@@ -170,8 +170,8 @@ export default class BlogForm extends Component {
             <div className="dz-message">Featured Image</div>
           </DropzoneComponent> */}
 
-          
           {this.props.editMode && this.props.blog.featured_image_url ? (
+            // <h1> images goes here....</h1>
             <div className="portfolio-manager-image-wrapper">
               <img src={this.props.blog.featured_image_url} />
 
