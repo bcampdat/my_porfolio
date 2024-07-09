@@ -15,7 +15,7 @@ export default class BlogForm extends Component {
       content: "",
       featured_image: "",
       apiUrl: "https://bcampdat.devcamp.space/portfolio/portfolio_blogs",
-      apiAction: "post"
+      apiAction: "post",
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -26,9 +26,7 @@ export default class BlogForm extends Component {
     this.componentConfig = this.componentConfig.bind(this);
     this.djsConfig = this.djsConfig.bind(this);
     this.handleFeaturedImageDrop = this.handleFeaturedImageDrop.bind(this);
-
     this.deleteImage = this.deleteImage.bind(this);
-
     this.featuredImageRef = React.createRef();
   }
 
@@ -106,6 +104,48 @@ export default class BlogForm extends Component {
     return formData;
   }
 
+  // handleSubmit(event) {
+
+  //   axios({
+  //     method: this.state.apiAction,
+  //     url: this.state.apiUrl,
+  //     data: this.buildForm(),
+  //     withCredentials: true,
+  //   })
+  //     .then((response) => {
+  //
+
+  //       if (this.state.featured_image) {
+  //         this.featuredImageRef.current.dropzone.removeAllFiles();
+  //       }
+
+  //       this.setState({
+  //         title: "",
+  //         blog_status: "",
+  //         content: "",
+  //         featured_image: "",
+  //       });
+
+  //       // this.props.handleSuccessfullFormSubmission(
+  //       //   response.data.portfolio_blog
+  //       // );
+
+  //       if (this.props.editMode) {
+  //         // Update blog detail
+  //         this.props.handleUpdateFormSubmission(response.data.portfolio_blog);
+  //       } else {
+  //         this.props.handleSuccessfullFormSubmission(
+  //           response.data.portfolio_blog
+  //         );
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log("handleSubmit for blog error", error);
+  //     });
+
+  //   event.preventDefault();
+  // }
+
   handleSubmit(event) {
     // axios
     //   .post(
@@ -121,7 +161,6 @@ export default class BlogForm extends Component {
     })
       .then((response) => {
         // this.props.handleSuccessfullFormSubmission(response.data);
-
         if (this.state.featured_image) {
           this.featuredImageRef.current.dropzone.removeAllFiles();
         }
