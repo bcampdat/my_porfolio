@@ -14,6 +14,8 @@ export default class BlogForm extends Component {
       blog_status: "",
       content: "",
       featured_image: "",
+      apiUrl: "https://bcampdat.devcamp.space/portfolio/portfolio_blogs",
+      apiAction: "post"
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -37,7 +39,7 @@ export default class BlogForm extends Component {
         { withCredentials: true }
       )
       .then((response) => {
-        console.log("response form blog image delete", response);
+        // console.log("response form blog image delete", response);
         this.props.handleFeaturedImageDelete();
       })
       .catch((error) => {
@@ -53,7 +55,7 @@ export default class BlogForm extends Component {
         // status: this.props.blog.status,
         blog_status: this.props.blog.blog_status,
         content: this.props.blog.content,
-        apiUrl: `https://jordan.devcamp.space/portfolio/portfolio_blogs/${this.props.blog.id}`,
+        apiUrl: `https://bcampdat.devcamp.space/portfolio/portfolio_blogs/${this.props.blog.id}`,
         apiAction: "patch",
       });
     }
@@ -129,14 +131,12 @@ export default class BlogForm extends Component {
           blog_status: "",
           content: "",
           featured_image: "",
-          apiUrl: "https://jordan.devcamp.space/portfolio/portfolio_blogs",
-          apiAction: "post",
         });
 
         // this.props.handleSuccessfullFormSubmission(
         //   response.data.portfolio_blog
         // );
-        
+
         if (this.props.editMode) {
           // Update blog detail
           this.props.handleUpdateFormSubmission(response.data.portfolio_blog);

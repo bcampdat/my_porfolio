@@ -16,7 +16,7 @@ export default class BlogModal extends Component {
         right: "auto",
         marginRight: "-50%",
         transform: "translate(-50%, -50%",
-        width: "800px",
+        width: "750px",
       },
       overlay: {
         backgroundColor: "rgba(1, 1, 1, 0.75)",
@@ -39,7 +39,7 @@ export default class BlogModal extends Component {
       <ReactModal
         style={this.customStyles}
         onRequestClose={() => {
-          console.log("testing modal close");
+          // console.log("testing modal close");
           this.props.handleModalClose();
         }}
         isOpen={this.props.modalIsOpen}
