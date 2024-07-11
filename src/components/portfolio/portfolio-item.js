@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class PortfolioItem extends Component {
   constructor(props) {
@@ -31,11 +32,12 @@ export default class PortfolioItem extends Component {
 
     return (
       // props list form rendering
-      <div
-        className="portfolio-item-wrapper"
-        onMouseEnter={() => this.handleMouseEnter()}
-        onMouseLeave={() => this.handleMouseLeave()}
-      >
+      // <div
+      //   className="portfolio-item-wrapper"
+      //   onMouseEnter={() => this.handleMouseEnter()}
+      //   onMouseLeave={() => this.handleMouseLeave()}
+      // >
+      <Link to={`/portfolio/${id}`}>
         {/* // espera a que ocurra el evento para ejecutar la funcion}} */}
 
         {/*<h1>{this.state.portfolioItemClass}</h1>  para probar el evento mouse y el efecto blur*/}
@@ -46,29 +48,43 @@ export default class PortfolioItem extends Component {
 
         {/* <img src={thumb_image_url}  usamos las fotos como fondo/> */}
         <div
-          className={
-            "portfolio-img-background " + this.state.portfolioItemClass
-          }
-          style={{
-            backgroundImage: "url(" + thumb_image_url + ")",
-          }}
-        />
+          //   className={
+          //     "portfolio-img-background " + this.state.portfolioItemClass
+          //   }
+          //   style={{
+          //     backgroundImage: "url(" + thumb_image_url + ")",
+          //   }}
+          // />
 
-        {/* <img src={logo} />
+          className="portfolio-item-wrapper"
+          onMouseEnter={() => this.handleMouseEnter()}
+          onMouseLeave={() => this.handleMouseLeave()}
+        >
+          <div
+            className={
+              "portfolio-img-background " + this.state.portfolioItemClass
+            }
+            style={{
+              backgroundImage: "url(" + thumb_image_url + ")",
+            }}
+          />
+
+          {/* <img src={logo} />
       {/* <Link to={`/portfolio/${props.slug}`}>Link</Link> */}
-        {/* incluimos el link con nombre link para todos */}
-        {/* <div>{description}</div>
+          {/* incluimos el link con nombre link para todos */}
+          {/* <div>{description}</div>
       <Link to={`/portfolio/${id}`}>Link</Link> */}
 
-        {/* cambiamos el diseño */}
-        <div className="img-text-wrapper">
-          <div className="logo-wrapper">
-            <img src={logo_url} />
-          </div>
+          {/* cambiamos el diseño */}
+          <div className="img-text-wrapper">
+            <div className="logo-wrapper">
+              <img src={logo_url} />
+            </div>
 
-          <div className="subtitle">{description}</div>
+            <div className="subtitle">{description}</div>
+          </div>
         </div>
-      </div>
+      </Link>
     );
   }
 }
