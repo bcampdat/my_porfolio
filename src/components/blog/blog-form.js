@@ -37,8 +37,8 @@ export default class BlogForm extends Component {
         { withCredentials: true }
       )
       .then((response) => {
-        // console.log("response form blog image delete", response);
         this.props.handleFeaturedImageDelete();
+        // console.log("response form blog image delete", response);
       })
       .catch((error) => {
         console.log("deleteImage error", error);
@@ -103,48 +103,6 @@ export default class BlogForm extends Component {
 
     return formData;
   }
-
-  // handleSubmit(event) {
-
-  //   axios({
-  //     method: this.state.apiAction,
-  //     url: this.state.apiUrl,
-  //     data: this.buildForm(),
-  //     withCredentials: true,
-  //   })
-  //     .then((response) => {
-  //
-
-  //       if (this.state.featured_image) {
-  //         this.featuredImageRef.current.dropzone.removeAllFiles();
-  //       }
-
-  //       this.setState({
-  //         title: "",
-  //         blog_status: "",
-  //         content: "",
-  //         featured_image: "",
-  //       });
-
-  //       // this.props.handleSuccessfullFormSubmission(
-  //       //   response.data.portfolio_blog
-  //       // );
-
-  //       if (this.props.editMode) {
-  //         // Update blog detail
-  //         this.props.handleUpdateFormSubmission(response.data.portfolio_blog);
-  //       } else {
-  //         this.props.handleSuccessfullFormSubmission(
-  //           response.data.portfolio_blog
-  //         );
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log("handleSubmit for blog error", error);
-  //     });
-
-  //   event.preventDefault();
-  // }
 
   handleSubmit(event) {
     // axios
