@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -77,7 +79,7 @@ export default class Login extends Component {
         <h2>{this.state.errorText} </h2>
         {/* captura errores */}
 
-        <form onSubmit={this.handleSubmit}>
+        {/* <form onSubmit={this.handleSubmit}>
           <input
             type="email"
             name="email"
@@ -92,13 +94,37 @@ export default class Login extends Component {
             placeholder="Your password"
             value={this.state.password}
             onChange={this.handleChange}
-          />
-
-          <div>
-            <button type="submit">Login</button>
+          /> */}
+        <form onSubmit={this.handleSubmit} className="auth-form-wrapper">
+          <div className="form-group">
+            <FontAwesomeIcon icon="envelope" />
+            <input
+              type="email"
+              name="email"
+              placeholder="Your email"
+              value={this.state.email}
+              onChange={this.handleChange}
+            />
           </div>
+
+          {/* <div>
+            <button type="submit">Login</button> */}
+          <div className="form-group">
+            <FontAwesomeIcon icon="lock" />
+            <input
+              type="password"
+              name="password"
+              placeholder="Your password"
+              value={this.state.password}
+              onChange={this.handleChange}
+            />
+          </div>
+
+          <button className="btn" type="submit">
+            Login
+          </button>
           {/* <h1>Form should go here</h1>
-        <div>button</div */}
+                <div>button</div */}
         </form>
       </div>
     );
